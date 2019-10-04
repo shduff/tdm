@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1 style="font-family:Courier;font-size:4em;margin:auto;width:85%;">EOTDMV2: First Pancake Edition</h1>
+	<hr>
+
+	<section>
+		<div style="width:30%;padding:0 3em;font-size:10px;font-family:Courier;">
+			<h1 style="font-family:Tacoma;font-size:8em;margin:1em 0 0 1em;">1.</h1>
+			<p>In this first masterpiece, I wanted to try and capture an "implied" movement, per Rosalie's descriptions of movement in her program of study. I was thinking about how to capture the effect of going into the light, being overcome by light, or even the effect when you take a photo or video and are backlit and you become a profile or shapeless shadow, X-Files-style. I wanted to take a picture that already had this effect and amplify it, growing the light to overtake the rest of the image.</p>
+			<p> I really like this picture of Kris and I, and I wanted to implement this effect. The things I really wanted to do was to identify where the lights were in the picture, having whiteness grow outward from each light source into a single mass to take over the picture, "eating" us from the outer edge inwards. I didn't know hot to implement this, so I wound up doing a two phase process.</p>
+			<ol>
+				<li>I duplicated the picture, removing the background of one, layering the two versions with the background-less photo in the back. Then, by decreasing the opacity of the front photo it appears the background is being overtaken by light as the white background fades into view/the backgrounded photo fades out. This pretty successfully captured the whiteness growing outward as a single mass."</li>
+				<li>I then decreased the opacity of the remaining picture, making sure to wait until the first opacity change was done, to simulate the overtaking of our bodies by the light. This failed to capture the effect of the light eating us from the outer edges, as our whole bodies faded out at the same rate.</li>
+			</ol>
+			<p></p>
+		</div>
+		<style>
+			#lights, #glowlights {
+				position:absolute;
+				top:25%;
+				left:40%;
+				background-size:cover;
+				height:400px;
+				width:600px;
+				margin:auto;
+				transition:2s;
+				transform:rotate(7deg);
+			}
+			#lights {
+				z-index:5;
+				background-image:url('./lights.jpg');
+				margin:15px;
+			}
+			#glowlights {
+				z-index:3;
+				background-image:url('./glowlights.jpg');
+				border:solid 15px tan;
+			}
+
+			@keyframes fade {
+			  0%   { opacity: 1; }
+			  5% { opacity: 0; }
+			}
+		</style>
+		<div id="lights">
+		</div>
+		<div id="glowlights">
+		</div>
+		<script>
+			var lightImage = document.getElementById('lights');
+			var glowlightsImage = document.getElementById('glowlights');
+
+			lightImage.addEventListener('click', function(element) {
+				if (element.target.classList.contains('fade')) {
+					element.target.classList.remove('fade');
+					element.target.style.opacity = 100;
+					glowlightsImage.style.animation = '';
+				} else {
+					element.target.classList.add('fade');
+					element.target.style.opacity = 0;
+					glowlightsImage.style.animation = 'fade';
+					glowlightsImage.style.animationDelay = '.3s';
+					glowlightsImage.style.animationDuration = '60s';
+					glowlightsImage.style.animationTimingFunction = 'ease-in-out';
+				}
+				
+			});
+		</script>
+	</section>
+
+	<section>
+		<style>
+			#fieldHolder {
+				position:absolute;
+				top:90%;
+				left:10%;
+				height:600px;
+				width:600px;
+				overflow:hidden;
+				border:solid 10px darkred;
+				transform:rotate(-3deg);
+			}
+			#fields {			
+				background-image:url(./fields.jpg);
+				background-size:cover;
+				height:100%;
+				width:100%;
+				margin:auto;
+			  	transform-origin:500px 330px;
+			}
+			#fields.zoomed {
+				transform:scale(5.5);
+			}
+
+			@keyframes fieldRock {
+				0%   {transform: rotate(0deg) scale(5.5);}
+			    33%  {transform: rotate(-15deg) scale(5.5);}
+			    66%  {transform: rotate(15deg) scale(5.5);}
+			}	
+		</style>
+		<h1 style="font-family:Helvetica;font-size:14em;margin:2em 0 0 4.5em;">2.</h1>
+		<audio id="careless">
+			<source src="./careless.m4a">
+		</audio>
+		<div id="fieldHolder">
+			<div id="fields">
+			</div>
+		</div>
+		<script>
+			var careless = document.getElementById('careless');
+			var fieldHolder = document.getElementById('fieldHolder');
+			var fields = document.getElementById('fields');
+	
+			fieldHolder.addEventListener('click', function(element) {
+				if (element.target.classList.contains('zoomed')) {
+					element.target.style.transition = '.8s';
+					element.target.classList.remove('zoomed');
+					fields.style.animation = '';
+					careless.pause();
+					careless.currentTime = 0;
+				} else {
+					element.target.style.transition = '2.5s';
+					element.target.classList.add('zoomed');
+					careless.play();
+					fields.style.animation = 'fieldRock';
+					fields.style.animationDuration = '8s';
+					fields.style.animationDelay = '2.5s';
+					fields.style.animationIterationCount = 'infinite';
+					fields.style.animationTimingFunction = 'linear'
+				}
+			});
+		</script>
+	</section>
+
+</body>
+</html>
