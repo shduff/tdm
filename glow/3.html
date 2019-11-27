@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Glow 3</title>
+</head>
+<body>
+	<style>
+		body {
+			background-color:black;
+		}
+		#object {
+			z-index:10;
+		}
+		.glow {
+			z-index:5;
+			margin:auto;
+			height:20px;
+			width:20px;
+			background-color:white;
+			border-radius:50%;
+		}
+		.grow {
+			height:2000px;
+			width:2000px;
+			transition:3s;
+		}
+	</style>
+
+	<div class="glow centered"></div>
+	<div id="object" class="centered"></div>
+
+	<script>
+		document.getElementById('object').addEventListener('click', function () {
+			document.getElementsByClassName('glow')[0].classList.add('grow');
+		});
+	</script>
+
+</body>
+</html>

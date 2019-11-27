@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Glow 2</title>
+</head>
+<body>
+
+	<style>
+		body {
+			background-color:black;
+		}
+		.glow {
+			background-color:white;
+			transition-duration:5s;
+		}
+	</style>
+
+	<div id="object" class="centered"></div>
+
+	<script>
+		document.getElementById('object').addEventListener('click', function () {
+			document.body.classList.add('glow');
+		});
+	</script>
+</body>
+</html>
