@@ -1,0 +1,23 @@
+---
+layout: fifty
+title: Glow 2
+permalink: /2/
+---
+
+<style>
+	body {
+		background-color:black;
+	}
+	.glow {
+		background-color:white;
+		transition-duration:5s;
+	}
+</style>
+
+<div id="object" class="centered"></div>
+
+<script>
+	document.getElementById('object').addEventListener('click', function () {
+		document.body.classList.add('glow');
+	});
+</script>

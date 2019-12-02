@@ -1,0 +1,26 @@
+---
+layout: page
+title: 50 Glows
+permalink: /fifty
+---
+
+<style>
+	div.glow-thumbnail {
+		height:40px;
+		width:40px;
+		display:inline-block;
+		border:dotted black 1px;
+		border-radius:10px;
+		margin:.7em;
+		font-size:4em;
+		color:pink;
+	}
+</style>
+
+<ul>
+
+{% for glow in site.fifty | sort %}
+	<li><a href="{{glow.permalink}}">{{ glow.title }}</a> </li>
+{% endfor %}
+
+</ul>

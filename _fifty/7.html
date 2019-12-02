@@ -1,0 +1,58 @@
+---
+layout: fifty
+title: Glow 7
+permalink: /7/
+---
+
+<style>
+	body {
+		background-color:black;
+	}
+	#top, #bottom, #right, #left {
+		position:fixed;
+	}
+	#top, #bottom {
+		width:100%;
+		height:10px;
+		left:0;
+		transition:3s;
+	}
+	#right, #left {
+		width:10px;
+		height:100%;
+		top:0;
+		transition:4s;
+	}
+	#top {
+		top:-10px;
+	}
+	#bottom {
+		bottom:-10px;
+	}
+	#right {
+		right:-10px;
+	}
+	#left {
+		left:-10px;
+	}
+	.glow {
+		box-shadow:0em 0em 100em 50em white;
+	}
+</style>
+
+<div id="object"></div>
+
+<div id="top"></div>
+<div id="right"></div>
+<div id="bottom"></div>
+<div id="left"></div>
+
+<script>
+	document.getElementById('object').addEventListener('click', function() {
+		document.getElementById('top').classList.add('glow');
+		document.getElementById('bottom').classList.add('glow');
+		document.getElementById('left').classList.add('glow');
+		document.getElementById('right').classList.add('glow');
+
+	})
+</script>

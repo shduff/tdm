@@ -1,0 +1,20 @@
+---
+layout: fifty
+title: Glow 1
+permalink: /1/
+---
+
+<div id="object" class="centered"></div>
+
+<script>
+	let object = document.getElementById('object');
+
+	window.addEventListener('load', function () {
+		object.style.backgroundImage = 'url({{site.url}}/media/fifty/object-bg.png)';
+	});
+
+	document.getElementById('object').addEventListener('click', function () {
+		object.style.backgroundImage = 'url({{site.url}}/media/fifty/object.png)';
+		object.style.transitionDuration = '4s';
+	});
+</script>

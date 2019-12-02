@@ -1,0 +1,42 @@
+---
+layout: fifty
+title: Glow 6
+permalink: /6/
+---
+
+<style>
+	body {
+		background-color:black;
+	}
+	#object {
+		z-index:10;
+	}
+
+	.glow {
+		z-index:5;
+		margin:auto;
+		height:20em;
+		width:20em;
+		border-radius:50%;
+	    box-shadow: 0em 0em 25em 10em #0ff;
+	    animation-timing-function: ease-in-out;
+	}
+
+	@keyframes glow {
+	  	0% {
+	    	box-shadow: 0em 0em 25em 10em #0ff;
+	  	}
+	  	50% {
+	    	box-shadow: 0em 0em 25em 12em #0ff;
+	  	}
+	}
+</style>
+
+<div class="wrapper"><div class="glow centered"></div></div>
+<div id="object" class="centered"></div>
+
+<script>
+	document.getElementById('object').addEventListener('click', function () {
+		document.getElementsByClassName('glow')[0].style.animation = 'glow 1s infinite';
+	});
+</script>

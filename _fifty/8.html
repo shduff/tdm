@@ -1,0 +1,21 @@
+---
+layout: fifty
+title: Glow 8
+permalink: /8/
+---
+
+<style>
+	.glow {
+		filter:brightness(5000%);
+		transition:14s ease-in;
+	}
+</style>
+
+<div id="object"></div>
+
+<script>
+	let object = document.getElementById('object');
+	object.addEventListener('click', function() {
+		object.classList.add('glow');
+	})
+</script>

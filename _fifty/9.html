@@ -1,0 +1,22 @@
+---
+layout: fifty
+title: Glow 9
+permalink: /9/
+---
+
+<style>
+	#object.glow {
+		background-image:url({{site.url}}/media/fifty/white.png);
+		background-size:contain;
+		transition:4s;
+	}
+</style>
+
+<div id="object"></div>
+
+<script>
+	let object = document.getElementById('object');
+	object.addEventListener('click', function() {
+		object.classList.add('glow');
+	})
+</script>
