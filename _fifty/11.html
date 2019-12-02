@@ -1,9 +1,58 @@
 ---
 layout: fifty
 title: Glow 11
-subtitle: 
+subtitle: Thinking about other shapes that indicate glowing, I thought about stars. Creating a star, it turns out, is no small task in HTML and CSS. In this effect, I wanted to place a star behind the object and spin and grow it until the entire background was filled. The star, created by drawing a triangle using the border attributes and then using an :after pseudo-selector, then proved hard control and move around. The effect I wound up with is a star that spins out from behind the object, growing and moving back to center in a kind of lasso-like effect.
 permalink: /11/
 ---
 
+<style>
+	body {
+		background-color:black;
+	}
+	#object {
+		z-index:10;
+	}
+	.glow {
+		z-index:0;
+		margin:auto;
+
+		/*To make the star shape*/
+		/*https://basicuse.net/articles/pl/textile/html_css/how_to_draw_stars_using_only_css*/
+		width: 0;
+		height: 0;
+		border-left: 75px solid transparent;
+		border-right: 75px solid transparent;
+		border-bottom: 150px solid yellow;
+	}
+	.glow:after {		
+		/*To make the star shape*/
+		position: absolute;
+		width: 0;
+		height: 0;
+		top: 50px;
+		left: -75px;
+		content: "";
+		border-left: 75px solid transparent;
+		border-right: 75px solid transparent;
+		border-top: 150px solid yellow;
+	}	
+	.glow.grow {
+		transform:rotate(180deg) scale(10) translate(-50%, -50%);
+		transform-origin: 0px 25px;
+		transition-duration:4s;
+	}
+
+
+
+</style>
+
+<div class="glow centered"></div>
+
 <div id="object" class="centered"></div>
+
+<script>
+	document.getElementById('object').addEventListener('click', function () {
+		document.getElementsByClassName('glow')[0].classList.add('grow');
+	});
+</script>
 

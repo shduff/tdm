@@ -1,0 +1,43 @@
+---
+layout: fifty
+title: Glow 13
+subtitle: In an attempt to find a simpler method of drawing a star, I created an 8 pointed star using the HTML <svg> element. Seeing that it looked like a superhero "Pow!" symbol, I decided to create a "glow" in comic-style, mirroring the impact of a punch or a miniature explosion. Is it a glow? I'd say so.
+permalink: /13/
+---
+
+<style>
+	#object {
+		position:relative;
+		z-index:10;
+	}
+	.glow {
+		z-index:5;
+	}
+	svg.grow {
+		animation: glow 2s ease-in-out;
+	}
+	@keyframes glow {
+	  	0% {
+	    	width:20%;
+	  	}
+	  	50% {
+	    	width:100%;
+	  	}
+	  	100% {
+	    	width:20%;
+	  	}
+	}
+</style>
+
+<svg class="glow centered" viewBox="-1 -1 50 50" width="200px">
+  <path d="M 35,40 30,48 21,42 11,44 9,34 0,30 6,20 4,10 14,8 20,0 28,5 38,3 l 1,10 8,5 -5,8 2,10z" stroke="black" stroke-width="1" fill="yellow" />
+</svg>
+
+<div id="object"></div>
+
+<script>
+	document.getElementById('object').addEventListener('click', function () {
+		document.getElementsByClassName('glow')[0].classList.add('grow');
+	});
+</script>
+

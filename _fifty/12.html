@@ -1,0 +1,78 @@
+---
+layout: fifty
+title: Glow 12
+subtitle: In a slight variation of Glow 3, I adjusted the CSS star to be a five-pointed star and had it swing out to create a Walk of Fame style star effect. In this effect, the glow is less literal and more about the glow of recognition, fame, legacy. Go get it object. 
+permalink: /12/
+---
+
+<style>
+	body {
+		background-color:black;
+	}
+	#object {
+		z-index:10;
+	}
+
+	.glow {
+		z-index:0;
+		margin:auto;
+
+		/*To make the star shape*/
+		/*https://basicuse.net/articles/pl/textile/html_css/how_to_draw_stars_using_only_css*/
+		width: 0px;
+		height: 0px;
+		border-right: 120px solid transparent;
+		border-bottom: 90px solid yellow;
+		border-left: 120px solid transparent;
+		transform: rotate(37deg) translate(-50%, -50%);
+	}
+
+	.glow:before {		
+		/*To make the star shape*/
+		position: absolute;
+		display: block;
+		width: 0;
+		height: 0;
+		top: -56px;
+		left: -72px;
+		content: "";
+		border-bottom: 84px solid yellow;
+		border-left: 28px solid transparent;
+		border-right: 28px solid transparent;
+		transform: rotate(323deg);
+	}
+
+	.glow:after {
+		/*To make the star shape*/
+		position: absolute;
+		display: block;
+		width: 0px;
+		height: 0px;
+		top: 0;
+		left: -120px;
+		content: "";
+		border-right: 120px solid transparent;
+		border-bottom: 90px solid yellow;
+		border-left: 120px solid transparent;
+		transform: rotate(286deg);
+	}
+	.glow.grow {
+		transform:rotate(180deg) scale(5) translate(-50%, -50%);
+		transform-origin: 0px 0px;
+		transition-duration:4s;
+	}
+
+
+
+</style>
+
+<div class="glow centered"></div>
+
+<div id="object" class="centered"></div>
+
+<script>
+	document.getElementById('object').addEventListener('click', function () {
+		document.getElementsByClassName('glow')[0].classList.add('grow');
+	});
+</script>
+

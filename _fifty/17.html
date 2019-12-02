@@ -1,0 +1,81 @@
+---
+layout: fifty
+title: Glow 17
+subtitle: In thinking about the unnatural light from Glow 16, I found myself thinking about other kinds of man-made, indoor light used to create glowing effects in theater settings. Obviously, the spot light. This is my digital homage to the glow effect of the spots.
+permalink: /17/
+---
+
+<style>
+	body {
+		background-color: black;
+	}
+	#object {
+		z-index:10;
+	}
+	#center-spot, #right-spot, #left-spot {
+		position:fixed;
+		z-index:5;
+		width: 0;
+		height: 0;
+		border-left: 30em solid transparent;
+		border-right: 30em solid transparent;
+		border-bottom: 100em solid lightyellow;
+
+		visibility:hidden;
+    }
+    #center-spot {
+    	top:0em;
+    	opacity:.4;
+
+    }
+    #right-spot {
+    	right:0;
+    	opacity:.2;
+    	transform:rotate(42deg) translateX(-10em) translateY(-15em);
+    }
+    #left-spot {
+    	left:0;
+    	opacity:.2;
+    	transform:rotate(-37deg) translateX(10em) translateY(-15em);
+    }
+    @keyframes flicker { 
+    	/*This doesn't work*/
+	  	0% {
+	  		visibility: visible;
+	  	}
+	  	10% {
+	  		visibility: hidden;
+	  	}
+	  	25% {
+	  		visibility: visible;
+	  	}
+	  	30% {
+	  		visibility: hidden;
+	  	}
+	  	40% {
+	  		visibility: visible;
+	  	}
+	 	55% {
+	  		visibility: hidden;
+	  	}
+	  	60% {
+	  		visibility: visible;
+	  	}
+	  	100% {
+	  		visibility:hidden;
+	  	}
+	}
+</style>
+
+<div class="centered" id="center-spot"></div>
+<div id="left-spot"></div>
+<div id="right-spot"></div>
+<div class="centered" id="object"></div>
+
+<script>
+	document.getElementById('object').addEventListener('click', function() {
+		document.getElementById('right-spot').style.animation = 'flicker 4s linear 0s infinite';
+		document.getElementById('left-spot').style.animation = 'flicker 2s linear 1s infinite';
+		document.getElementById('center-spot').style.animation = 'flicker 3s linear 3s infinite';
+	})
+</script>

@@ -1,0 +1,62 @@
+---
+layout: fifty
+title: Glow 15
+subtitle: But the field of neon lights in Glow 14 is still so geometrical. In this glowing field, I tried to capture the softness of the edges of the light given off by neon. Between the movement and shapes and soft edges, I couldn't help but imagine the effect of light reflecting off of smoke or fog. This glow effect straddles the natural and the man-made, drawing a line between neon and moonlight, mist and smog.
+permalink: /15/
+---
+
+<style>
+	body {
+		background-color:black;
+	}
+	#object {
+		z-index:10;
+	}
+	.neon {
+		visibility:hidden;
+		position:relative;
+		z-index:5;
+		height:.1px;
+		border-radius:5px;
+		background-color:lightyellow;
+		animation:glow;
+		animation-iteration-count: infinite;
+		animation-timing-function: ease-in-out;
+	}
+	@keyframes glow {
+	  	0% {
+	    	transform:translateX(0%);
+	  	}
+	  	50% {
+	    	transform:translateX(20%);
+	  	}
+	  	100% {
+	    	transform:translateX(0%);
+	  	}
+	}
+</style>
+
+<div id="object" class="centered"></div>
+
+<script>
+	window.addEventListener('load', function() {
+		for (i=0;i<(screen.height/3);i++) {
+			let div = document.createElement('div');
+			div.style.top = (i+1)*20;
+			div.style.left = (Math.floor(Math.random() * (20 - (-20))) + -20) + '%';
+			div.style.animationDuration = Math.floor(Math.random() * 12) + 4 + 's';
+			div.style.boxShadow = '0 0 20px 10px lightyellow';
+			div.style.width = Math.floor(Math.random() * 30) + 60 + '%';
+			div.classList.add('neon');
+			div.style.margin =  Math.floor(Math.random() * 12) + 1 +'px';
+			document.body.appendChild(div);
+		}
+	})
+	document.getElementById('object').addEventListener('click', function() {
+		let neons = document.getElementsByClassName('neon');
+		for (i=0;i<neons.length;i++) {
+			neons[i].style.transitionDuration = '2s'; // This isn't currently working
+			neons[i].style.visibility = 'visible';
+		}
+	})
+</script>
