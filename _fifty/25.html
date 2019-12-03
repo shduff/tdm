@@ -1,0 +1,39 @@
+---
+number: 25
+layout: fifty
+title: Lightning
+description: 
+permalink: /25/
+---
+
+<style>
+	body {
+		background:black;
+	}
+	@keyframes lightning {
+		3% {background:black;}
+		4% {background:lightyellow; opacity:.6;}
+		5% {background:black; opacity:1;}
+		38% {background:black;}
+		39% {background:lightyellow; opacity:.6;}
+		40% {background:black; opacity:1;}
+		43% {background:black;}
+		44% {background:lightyellow; opacity:.6;}
+		45% {background:black; opacity:1;}
+		86% {background:black;}
+		87% {background:lightyellow; opacity:.6;}
+		88% {background:black; opacity:1;}
+		93% {background:black;}
+		94% {background:lightyellow; opacity:.6;}
+		95% {background:black; opacity:1;}
+		100% {background:black;}
+	}
+</style>
+
+<div id="object"></div>
+
+<script>
+	document.getElementById('object').addEventListener('click', function() {
+		document.body.style.animation = 'lightning 14s ease-in-out infinite';
+	})
+</script>
