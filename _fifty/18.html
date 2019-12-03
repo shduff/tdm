@@ -1,0 +1,90 @@
+---
+number: 18
+layout: fifty
+title: The Search
+description:
+permalink: /18/
+---
+
+<style>
+	body {
+		background-color: black;
+	}
+	#object {
+		z-index:10;
+	}
+	#right-spot, #left-spot {
+		position:fixed;
+		z-index:5;
+		width: 0;
+		height: 0;
+		border-left: 50em solid transparent;
+		border-right: 50em solid transparent;
+		border-bottom: 200em solid lightyellow;
+    	opacity:.4;
+    	transform-origin:top center;
+    	/*https://css-tricks.com/almanac/properties/t/transform-origin/*/
+    	visibility:hidden;
+	}
+	#right-spot {
+		transform:rotate(45deg);	
+		top:-10em;
+		right:-60em;	
+    }
+    #left-spot {
+    	transform:rotate(-15deg);
+    	top:-10em;
+		left:-40em;
+    }
+    @keyframes right-search {
+    	0% {
+    		transform:rotate(12deg);
+    	}
+    	15% {
+    		transform:rotate(80deg);
+    	}
+    	50% {
+    		transform:rotate(25deg);
+    	}
+    	85% {
+    		transform:rotate(60deg);
+    	}
+    	100% {
+    		transform:rotate(12deg);
+    	}
+    }
+	@keyframes left-search {
+    	0% {
+    		visibility:visible;
+    		transform:rotate(-15deg);
+    	}
+    	11% {
+    		transform:rotate(15deg);
+    	}
+    	44% {
+    		transform:rotate(-65deg);
+    	}
+    	78% {
+    		transform:rotate(0deg);
+    	}
+    	100% {
+    		transform:rotate(-15deg);
+    	}
+    }
+</style>
+
+<div id="right-spot"></div>
+<div id="left-spot"></div>
+
+<div class="centered" id="object"></div>
+
+<script>
+	let rightSpot = document.getElementById('right-spot');
+	let leftSpot = document.getElementById('left-spot');
+	document.getElementById('object').addEventListener('click', function() {
+		rightSpot.style.visibility = 'visible';
+		rightSpot.style.animation = 'right-search 12s ease-in-out infinite';
+		// leftSpot.style.visibility = 'visible';
+		leftSpot.style.animation = 'left-search 8s ease-in-out 2s infinite';
+	})
+</script>

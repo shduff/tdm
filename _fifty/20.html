@@ -1,0 +1,45 @@
+---
+number: 20
+layout: fifty
+title: Glowing Butt
+description: 
+permalink: /20/
+---
+
+<style>
+	body {
+		background-color: black;
+	}
+	#object {
+		z-index:5;
+	}
+	#firefly {
+		position:fixed;
+		visibility:hidden;
+		z-index:10;
+		height:5px;
+		width:8px;
+		border-radius:50%;
+		background-color:lightyellow;
+		transition:1s;
+		box-shadow:0 0 5px 5px lightyellow;
+	}
+</style>
+
+<div id="firefly"></div>
+<div class="centered" id="object"></div>
+
+<script>
+	let firefly = document.getElementById('firefly');
+
+	
+	document.getElementById('object').addEventListener('click', function() {
+		firefly.style.top = '-20px';
+		firefly.style.left = '-20px';
+		firefly.style.visibility = 'visible';
+		setInterval(function() {
+			firefly.style.top = Math.floor(Math.random()*window.innerHeight) + 'px';
+			firefly.style.left = Math.floor(Math.random()*window.innerWidth) + 'px';	
+		}, 1000);
+	})
+</script>

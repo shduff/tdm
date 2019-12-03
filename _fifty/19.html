@@ -1,0 +1,48 @@
+---
+number: 19
+layout: fifty
+title: Xerox
+description: 
+permalink: /19/
+---
+
+<style>
+	body {
+		background-color: black;
+	}
+	#object {
+		z-index:5;
+	}
+	#copy {
+		position:fixed;
+		z-index:10;
+		right:0;
+		top:0;
+		box-shadow:0 0 20em 10em lightyellow;
+		min-height:100%;
+		width:20px;
+		background-color:lightyellow;
+		transition:1s;
+		transition-timing-function:ease-in-out;
+		visibility:none;
+	}
+	@keyframes copy {
+		100% {
+			right:100%;
+		}
+	}
+</style>
+
+<div id="copy"></div>
+<div class="centered" id="object"></div>
+
+<script>
+	let copy = document.getElementById('copy');
+	let object = document.getElementById('object');
+	object.addEventListener('click', function() {
+		copy.style.visibility = 'visible';
+		copy.style.right = '100%';
+		setTimeout(function () {object.style.filter = 'grayscale(100%)'}, 500);
+
+	})
+</script>

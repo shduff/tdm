@@ -1,0 +1,24 @@
+---
+number: 9
+layout: fifty
+title: White Background Image 
+description: Feeling a little stuck, I looked back at the earlier glow effects and realized there was another way I could use the changing background-image technique from Glow 1. In this glow, rather than transitioning from an object photo with background to one without for an effect that impacts the object's environment, I transitioned from an object photo without a background to a completely white image for an effect that directly impacts the object.
+permalink: /9/
+---
+
+<style>
+	#object.glow {
+		background-image:url({{site.url}}/media/fifty/white.png);
+		background-size:contain;
+		transition:4s;
+	}
+</style>
+
+<div id="object"></div>
+
+<script>
+	let object = document.getElementById('object');
+	object.addEventListener('click', function() {
+		object.classList.add('glow');
+	})
+</script>

@@ -1,0 +1,43 @@
+---
+number: 23
+layout: fifty
+title: Flickering Candle
+description: 
+permalink: /23/
+---
+<style>
+	body {
+		background:black;
+	}
+	#object {
+		z-index:10;
+	}
+	#reflection {
+		position:fixed;
+		visibility:hidden;
+		z-index:5;
+		width:100%;
+		height:100%;
+		top:0;
+		left:0;
+		opacity:.3;
+		animation:reflect 1s infinite;
+		transition:2s;
+	}
+
+	@keyframes reflect {
+		0% { background-image: radial-gradient( yellow 10%, gold 33%, orange 44%, darkorange 58%, red 72%, darkred 90%); }
+		33% { background-image: radial-gradient( yellow 24%, gold 33%, orange 59%, darkorange 71%, red 80%, darkred 88%); }
+		66% { background-image: radial-gradient( yellow 12%, gold 24%, orange 39%, darkorange 55%, red 73%, darkred 86%); }
+		100% { background-image: radial-gradient( yellow 24%, gold 33%, orange 59%, darkorange 71%, red 80%, darkred 88%); }
+	}
+</style>
+
+<div id="reflection"></div>
+<div class="centered" id="object"></div>
+
+<script>
+	document.getElementById('object').addEventListener('click', function() {
+		document.getElementById('reflection').style.visibility = 'visible';
+	})
+</script>

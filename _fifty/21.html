@@ -1,0 +1,66 @@
+---
+number: 21
+layout: fifty
+title: Glowing Butts
+description: 
+permalink: /21/
+---
+
+<style>
+	body {
+		background-color: black;
+	}
+	#object {
+		z-index:5;
+	}
+	.firefly {
+		position:fixed;
+		visibility:hidden;
+		/*z-index:10;*/
+		height:5px;
+		width:8px;
+		border-radius:50%;
+		background-color:lightyellow;
+		transition:2s;
+		box-shadow:0 0 5px 2px lightyellow;
+	}
+	@keyframes buzz {
+		0% { transform: translate(2px, 1px) rotate(0deg); }
+		10% { transform: translate(-1px, -2px) rotate(-1deg); }
+		20% { transform: translate(-3px, 0px) rotate(1deg); }
+		30% { transform: translate(0px, 2px) rotate(0deg); }
+		40% { transform: translate(1px, -1px) rotate(1deg); }
+		50% { transform: translate(-1px, 2px) rotate(-1deg); }
+		60% { transform: translate(-3px, 1px) rotate(0deg); }
+		70% { transform: translate(2px, 1px) rotate(-1deg); }
+		80% { transform: translate(-1px, -1px) rotate(1deg); }
+		90% { transform: translate(2px, 2px) rotate(0deg); }
+		100% { transform: translate(1px, -2px) rotate(-1deg); }
+	}
+</style>
+
+<div class="centered" id="object"></div>
+
+<script>	
+	document.getElementById('object').addEventListener('click', function() {
+		for (i=0;i<35;i++) {
+			let firefly = document.createElement('div');
+			firefly.id = 'firefly-' + i;
+			firefly.classList.add('firefly');
+			firefly.style.zIndex = Math.floor(Math.random()*10);
+			firefly.style.visibility = 'visible';
+			firefly.style.top = Math.floor(Math.random() * -20) + 1 + 'px';
+			// How to generate a random number between max andmin: Math.floor(Math.random() * (max - min + 1) + min)
+			firefly.style.left = Math.floor(Math.random() * window.innerWidth);
+			firefly.style.animation = 'buzz ' + Math.random()*3 + 's infinite';
+			document.body.appendChild(firefly);
+
+			setInterval(function() {
+				// https://jsfiddle.net/phpdeveloperrahul/cnLFu/
+				firefly.style.top = Math.floor(Math.random()*window.innerHeight) + 'px';
+				firefly.style.left = Math.floor(Math.random()*window.innerWidth) + 'px';	
+			}, Math.floor(Math.random() * (3000 - 1000 + 1) + 1000));			
+		}
+
+	})
+</script>

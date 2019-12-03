@@ -1,0 +1,54 @@
+---
+number: 4
+layout: fifty
+title: Psychadelic Tunnel
+description: Exaggerating the cartoonish aesthetic of Glow 3, this glow begins to enter the realm of psychadelia. Instead of placing a single, white circle behind the object, this effect places hundreds of nested, rainbow-colored circles, all of which expand outward when the object is clicked, creating a psychadelic, tunnel effect. Is it a glow? Why not?
+permalink: /4/
+---
+
+<style>
+	body {
+		background-color:black;
+	}
+	#object {
+		z-index:10;
+	}
+	.glow {
+		z-index:5;
+		margin:auto;
+		height:140px;
+		width:140px;
+		background-color:white;
+		border-radius:50%;
+	}
+	.grow {
+		height:100000px;
+		width:100000px;
+		transition-duration:40s;
+		transition-timing-function:linear;
+	}
+</style>
+
+<div class="glow centered" id="0"></div>
+<div id="object" class="centered"></div>
+
+<script>
+	let colors = ['red','orange','yellow','green','blue','indigo','violet','brown'];
+	let glow = document.getElementsByClassName('glow')[0];
+
+	for (i=0;i<100*colors.length;i++) {
+		let div = document.createElement('div');
+		div.classList.add('centered');
+		div.style.width = '95%';
+		div.style.height = '95%';
+		div.style.borderRadius = '50%'
+		div.id = i+1;
+		div.style.backgroundColor = colors[i%colors.length];
+		document.getElementById(i).appendChild(div);
+		console.log(i);
+	}
+
+	document.getElementById('object').addEventListener('click', function () {
+		glow.classList.add('grow');
+	});
+</script>
