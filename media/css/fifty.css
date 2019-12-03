@@ -1,7 +1,9 @@
+---
+---
 #object {
 	height:50em;
 	width:50em;
-	background-image:url(/media/fifty/object.png);
+	background-image:url({{site.baseurl}}/media/fifty/object.png);
 	background-size:cover;
 	margin:auto;
 }
