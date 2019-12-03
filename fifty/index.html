@@ -6,8 +6,8 @@ permalink: /fifty
 
 <div id="glow-thumbnail-container">
 
-{% for glow in site.fifty | sort: "number" %}
-	<a href="{{site.baseurl}}/fifty/{{glow.permalink}}">
+{% for glow in site.fifty %}
+	<a href="{{site.baseurl}}/fifty{{glow.permalink}}">
 		<div class="glow-thumbnail">
 			<h1>{{ glow.number }}</h1>
 			<h3>{{ glow.title }}</h3>
