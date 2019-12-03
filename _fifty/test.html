@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<div id="test"></div>
+	<div id="triangle-test"></div>
+
+	<style>
+		#test {
+			animation:spin 6s infinite;
+			border:solid 1px black;
+			height:200px;
+			width:400px;
+			margin-left:10em;
+			transform-origin:0px 0px;
+		}
+		@keyframes spin {
+			0% {
+				transform:rotate(90deg) ;
+			}
+		}
+		#triangle-test {
+			width: 0;
+			height: 0;
+			border-left: 50em solid transparent;
+			border-right: 50em solid transparent;
+			border-bottom: 200em solid yellow;
+			transform:rotate(-45deg);
+			transform-origin:top center;
+			animation:spin 2s ease-in-out infinite;
+		}
+	</style>
+
+</body>
+</html>

@@ -17,8 +17,8 @@ title: Go With The Glow
 email: shaunalynn@powderhouse.org
 description: >- # this means to ignore newlines until "baseurl:"
   Combining computation, expressive movement, and an exploration of the ecstatic.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/tdm" # the subpath of your site, e.g. /blog
+url: "http://shaunalynn.org" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: shduff
 github_username:  shduff
 
