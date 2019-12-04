@@ -1,5 +1,40 @@
 ---
 ---
+#desc-container {
+	position:fixed;
+	display:grid;
+	grid-template-columns: 80% 20%;
+	grid-template-areas: "....... reload" "....... icon" "desc .......";
+	top:0em;
+	right:-1em;
+	width:25%;
+	z-index:20;
+}
+#desc-icon {
+	grid-area:icon;
+	font-size:3em;
+	margin:-.5em .6em 0em 0em;
+	cursor:pointer;
+	transform:scaleX(-1); /*Flip over X axis so stem of bubble points toward description bubble point*/
+}
+#desc {
+	grid-area:desc;
+	text-align:justify;
+	margin:0;
+	padding:.8em 1em;
+	background:white;
+	border:solid 1px black;
+	border-radius:20px 0 20px 20px;
+	display:none;
+}
+#reload {
+	grid-area:reload;
+	font-size:3.8em;
+	margin:0 0 .3em  -.1em;
+	cursor:pointer;
+	color:#808080;
+}
+
 #object {
 	height:50em;
 	width:50em;
@@ -14,4 +49,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.visible {
+	display:block !important;
 }

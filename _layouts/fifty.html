@@ -5,6 +5,25 @@
 	<title>{{page.title}}</title>
 </head>
 <body>
+	<div id="desc-container">
+		<p id="desc-icon">
+			👁‍🗨
+		</p>
+		<p id="desc">
+			{{ page.description }}
+		</p>
+		<p id="reload">
+			↺
+		</p>
+	</div>
+	<script>
+		document.getElementById('desc-icon').addEventListener('click', function() {
+			document.getElementById('desc').classList.toggle('visible');
+		});
+		document.getElementById('reload').addEventListener('click', function() {
+			location.reload();
+		});
+	</script>
 
 	{{content}}
 
