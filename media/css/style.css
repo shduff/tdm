@@ -45,6 +45,14 @@ a, a:visited {
 	box-shadow:0 0 .2em .2em darkgrey;
 	transition:1s;
 }
+h1#splash-title {
+	margin:0 .5em;
+	position:absolute;
+	top:0;
+	left:0;
+	font-size:3.8em;
+	opacity:.5;
+}
 #splash-text {
 	position:relative;
 	width:90%;
