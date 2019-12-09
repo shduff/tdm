@@ -7,48 +7,73 @@ permalink: fifty/4/
 ---
 
 <style>
+	/*Set the background of the page to black.*/
 	body {
 		background-color:black;
 	}
+	/*For any element with the id "object"*/
 	#object {
+		/*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
 		z-index:10;
 	}
+	/*For any element with the class "glow"*/
 	.glow {
+		/*This z-index value means elements with class="glow" (z-index=5) will be "behind" elements with id="object" (z-index=10).*/
 		z-index:5;
-		margin:auto;
+		/*Set the size of .glow elements based on height and width...*/
 		height:140px;
 		width:140px;
+		/*Make it a circle...*/
+		border-radius:50%;	
+		/*And color it white.*/
 		background-color:white;
-		border-radius:50%;
 	}
 	.grow {
+		/*Assign any element with the class "grow" to have a *very* large size, based on height and width.*/
 		height:100000px;
 		width:100000px;
+		/*Make any changes to .grow elements take 40 seconds to happen.*/
 		transition-duration:40s;
+		/*And make them happen in a linear way, so they go as quickly when they start to change as when they finish.*/
 		transition-timing-function:linear;
 	}
 </style>
-
+<!-- Create a div called "glow", center it on the page using the "centered" class, and give it a unique id. We'll return to the role of the id later.-->
 <div class="glow centered" id="0"></div>
+<!-- Now, create a div to hold your object and center it on the page using the "centered" class.-->
 <div id="object" class="centered"></div>
 
 <script>
+	// Within the JavaScript zone, we'll start by creating a list of the colors we want to use in the tunnel effect.
 	let colors = ['red','orange','yellow','green','blue','indigo','violet','brown'];
+	// Then we'll go gran the first .glow element. We know there's only one, so we actually know exactly what we're grabbing.
 	let glow = document.getElementsByClassName('glow')[0];
 
+	// Then, we're going to create a loop that runs as many times as there are colors in our list * 100. We want to create a *long* tunnel. Within this look, the variable "i" will keep track of which loop we're on. During the first run, i=0. During the second, i=1. And so on.
 	for (i=0;i<100*colors.length;i++) {
+		// During each run, we'll create a div element...
 		let div = document.createElement('div');
-		div.classList.add('centered');
-		div.style.width = '95%';
-		div.style.height = '95%';
-		div.style.borderRadius = '50%'
+		// Give the div a unique id, starting with "1" (since we used "0" for the parent div we created through HTML)
 		div.id = i+1;
+		// Give it the class "centered" to center it on the page with our default CSS styling
+		div.classList.add('centered');
+		// Set the height to be 95% of the width of its parent element, i.e. the div this div will be placed within...
+		div.style.width = '95%';
+		// Doing the same thing for the height of the div...
+		div.style.height = '95%';
+		// Making the div a circle
+		div.style.borderRadius = '50%'
+		// Assigning its background color in such a way that the nested divs will iterate through the colors we put in the list of colors above
 		div.style.backgroundColor = colors[i%colors.length];
+		// Then grab the element with id="0", which will be the last div we made since we've given the current div id="i+1", and put the current div inside of it
 		document.getElementById(i).appendChild(div);
-		console.log(i);
+		// Because this look happens many times, the result is a long list of nested divs with the outermost div having the id="0" with one nested inside of it having id="1", and then inside that id="2", and so on and so on
 	}
 
+	// Then, whenever the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function () {
+		// Add the .grow class to our .glow div 
 		glow.classList.add('grow');
+		// Because the .glow div is the one with all the nested divs inside of it, and because the CSS of each of those divs sets the size relative to its parent's size, when the outermost parent div (AKA .glow) expands, all its children expand proportionally, creating a tunnel like effect as the multicolored circles all grow in size, moving off the page, as if we are moving into them
 	});
 </script>

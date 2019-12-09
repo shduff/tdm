@@ -6,25 +6,37 @@ description: While imagining fire, I couldn't help but think about another insta
 permalink: fifty/23/
 ---
 <style>
-	body {
-		background:black;
-	}
-	#object {
+	/*Set the background of the page to black.*/
+    body {
+        background-color: black;
+    }
+    /*For any element with the id "object"*/
+    #object {
+        /*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
 		z-index:10;
 	}
+	/*For any element with the id "reflection"*/
 	#reflection {
+		/*Set the position to fixed, meaning relative to the visible window screen*/
 		position:fixed;
+		/*Hid the element*/
 		visibility:hidden;
+		/*Set the z-index to 5, thus placing it "behind" the #object div*/
 		z-index:5;
+		/*Set the height and width to be 100% of the height and width of the parent element, in this case the page*/
 		width:100%;
 		height:100%;
+		/*Place the element flush against the top and left of the screen*/
 		top:0;
 		left:0;
+		/*Set the opacity to 30%*/
 		opacity:.3;
+		/*Apply the keyfrome animation called "reflect" with a 1 second duration and on an infinite loop*/
 		animation:reflect 1s infinite;
+		/*Make any changes to this element take 2 seconds to happen*/
 		transition:2s;
 	}
-
+	/*Create a keyframe animation called "reflect" which, at increments of 1/3 of the full animation duration, increases and decreases the relative proportions of colors in a radial gradient background, mimicing the flickering effect of candlelight against a wall */
 	@keyframes reflect {
 		0% { background-image: radial-gradient( yellow 10%, gold 33%, orange 44%, darkorange 58%, red 72%, darkred 90%); }
 		33% { background-image: radial-gradient( yellow 24%, gold 33%, orange 59%, darkorange 71%, red 80%, darkred 88%); }
@@ -33,11 +45,16 @@ permalink: fifty/23/
 	}
 </style>
 
+<!-- Create a div with the id "reflection" -->
 <div id="reflection"></div>
+
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
 <div class="centered" id="object"></div>
 
 <script>
+	// Any time the #object div is clicked
 	document.getElementById('object').addEventListener('click', function() {
+		// Make the #reflection div visible
 		document.getElementById('reflection').style.visibility = 'visible';
-	})
+	});
 </script>

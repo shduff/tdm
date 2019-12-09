@@ -7,19 +7,27 @@ permalink: fifty/2/
 ---
 
 <style>
+	/*Set the background of the page to black.*/
 	body {
 		background-color:black;
 	}
+	/*Then, set any elements with class="glow"...*/
 	.glow {
+		/*to have a white background...*/
 		background-color:white;
+		/*and to take 5 seconds to make any transitions.*/
 		transition-duration:5s;
 	}
 </style>
 
+<!-- Now, create a div to hold your object and center it on the page using the "centered" class.-->
 <div id="object" class="centered"></div>
 
 <script>
+	// Whenever your #object div is clicked...
 	document.getElementById('object').addEventListener('click', function () {
+		// Add the class "glow" to the body of your page.
 		document.body.classList.add('glow');
+		// When this class is added to the body, it will trigger a background-color change from black to white over a 4 second transition.
 	});
 </script>

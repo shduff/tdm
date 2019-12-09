@@ -7,40 +7,58 @@ permalink: fifty/17/
 ---
 
 <style>
+	/*Set the background of the page to black.*/
 	body {
 		background-color: black;
 	}
+	/*For any element with the id "object"*/
 	#object {
+		/*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
 		z-index:10;
 	}
+	/*For divs with the id "center-spot", "right-spot", and "left-spot"*/
 	#center-spot, #right-spot, #left-spot {
+		/*Set their positioning to be fixed, which means relative to the visible window screen*/
 		position:fixed;
+		/*Set their z-index to 5, which means they will be "behind" the #object div*/
 		z-index:5;
+		/*Then use the triangle drawing technique from the earlier star-based glows, drawn from this article: https://basicuse.net/articles/pl/textile/html_css/how_to_draw_stars_using_only_css, to create triangle-shaped, spotlight divs*/
 		width: 0;
 		height: 0;
 		border-left: 30em solid transparent;
 		border-right: 30em solid transparent;
 		border-bottom: 100em solid lightyellow;
-
+		/*Finally, make them invisible until called.*/
 		visibility:hidden;
     }
+	/*For any element with the id "center-spot"*/
     #center-spot {
-    	top:0em;
+    	/*Position it so it's aligned with the top of the visible window screen*/
+    	top:0;
+    	/*And it is 40% opaque*/
     	opacity:.4;
 
     }
+	/*For any element with the id "right-spot"*/
     #right-spot {
+    	/*Position it so it's aligned to the right side of the screen...*/
     	right:0;
+    	/*With an opacity of 20%...*/
     	opacity:.2;
+    	/*And then rotate it 42 degrees, moving it slightly off-screen in the up and right directions */
     	transform:rotate(42deg) translateX(-10em) translateY(-15em);
     }
+	/*For any element with the id "right-spot"*/
     #left-spot {
+    	/*Position it so it's aligned to the right side of the screen...*/
     	left:0;
+    	/*With an opacity of 20%...*/
     	opacity:.2;
+    	/*And then rotate it 37 degrees, moving it slightly off-screen in the up and left directions */
     	transform:rotate(-37deg) translateX(10em) translateY(-15em);
     }
+    /*This keyframe is meant to make the lights flicker when they first turn on, but it *doesn't work*. It does make the spots visible, though... so I am still using it as the way to turn the spots on, as it were...*/
     @keyframes flicker { 
-    	/*This doesn't work*/
 	  	0% {
 	  		visibility: visible;
 	  	}
@@ -68,15 +86,22 @@ permalink: fifty/17/
 	}
 </style>
 
-<div class="centered" id="center-spot"></div>
+<!-- Create two divs for your left and right spots, labeling one with the id "left-spot" and the other with the id "right-spot" -->
 <div id="left-spot"></div>
 <div id="right-spot"></div>
+
+<!-- Create a div for your center-spot and center it on the page using the "centered" class.-->
+<div class="centered" id="center-spot"></div>
+
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
 <div class="centered" id="object"></div>
 
 <script>
+	// Whenever the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
+		// Grab the divs called "right-spot", "left-spot", and "center-spot", and apply the keyframe animation called flicker. The animation isn't currently working as desired, so currently just turns the visibility of each div to "visible", turning the spots "on"
 		document.getElementById('right-spot').style.animation = 'flicker 4s linear 0s infinite';
 		document.getElementById('left-spot').style.animation = 'flicker 2s linear 1s infinite';
 		document.getElementById('center-spot').style.animation = 'flicker 3s linear 3s infinite';
-	})
+	});
 </script>

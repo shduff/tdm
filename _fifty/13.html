@@ -7,41 +7,57 @@ permalink: fifty/13/
 ---
 
 <style>
+	/*Set the background of the page to black.*/
 	body {
 		background-color: black;
 	}
+	/*For any element with the id "object"*/
 	#object {
-		position:relative;
+		/*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
 		z-index:10;
 	}
+	/*For any element with the class "glow"*/
 	.glow {
+		/*This z-index value means elements with class="glow" (z-index=5) will be "behind" elements with id="object" (z-index=10).*/
 		z-index:5;
 	}
+	/*For any svg element with the class "grow"*/
 	svg.grow {
+		/*Assign the keyframe animation called glow with a 2 second duration and with timing that eases in and out, meaning it goes more slowly at the beginning and end than in the beginning*/
 		animation: glow 2s ease-in-out;
 	}
+	/*Create a keyframe animation with the title glow*/
 	@keyframes glow {
 	  	0% {
+			/*At the beginning of the animation, set the width of the element to 20% the size of it's parent element*/
 	    	width:20%;
 	  	}
 	  	50% {
+	  		/*At the half-way point, grow the width of the element to 100% the size of its parent element*/
 	    	width:100%;
 	  	}
 	  	100% {
+			/*At the end of the animation, reset the width of the element to 20% the size of it's parent element*/
 	    	width:20%;
 	  	}
 	}
 </style>
 
+<!-- Create an SVG element with the class "glow", and center it using the default CSS we've assigned to the class "centered" -->
 <svg class="glow centered" viewBox="-1 -1 50 50" width="200px">
+	<!-- Define the points of the SVG path you want to create, along with other properties like stroke, stroke-width, fill -->
   <path d="M 35,40 30,48 21,42 11,44 9,34 0,30 6,20 4,10 14,8 20,0 28,5 38,3 l 1,10 8,5 -5,8 2,10z" stroke="black" stroke-width="1" fill="yellow" />
 </svg>
 
-<div id="object"></div>
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
+<div id="object" class="centered"></div>
 
 <script>
+	// Whenever the #obect div is clicked...
 	document.getElementById('object').addEventListener('click', function () {
+		// Grab the first (and only) element with the class "glow" and add the class "grow" to it
 		document.getElementsByClassName('glow')[0].classList.add('grow');
+		// This has the effect of applying the CSS properties assigned to ".glow.grow", which will rotate and grow the star shape over the 4 second transition
 	});
 </script>
 

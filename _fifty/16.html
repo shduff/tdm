@@ -8,28 +8,46 @@ permalink: fifty/16/
 
 
 <style>
+	/*For any element with the id "object"*/
 	#object {
-		position:relative;
+		/*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
 		z-index:10;
 	}
+	/*For any element with the id "wall"*/
 	#wall {
+		/*Set the positioning to be fixed, which means set relative to the visible window screen*/
 		position:fixed;
+		/*Set its z-index to 5, meaning it's "behind" the #object div*/
 		z-index:5;
+		/*Place it 0 from the top of the visible window screen, make it totally flush*/
 		top:0;
+		/*Place it 0 from the left of the visible window screen, make it totally flush*/
 		left:0;
+		/*Set its height to 70% of its parent element*/
 		height:70%;
+		/*Set its width to 100% of its parent element*/
 		width:100%;
+		/*And set the background to a linear gradient, in the positive vertical direction (up), to transition from a light to dark color*/
 		background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 100%);
 	}
+	/*For any element with the id "floor"*/
 	#floor {
+		/*Set the positioning to be fixed, which means set relative to the visible window screen*/
 		position:fixed;
+		/*Set its z-index to 5, meaning it's "behind" the #object div*/
 		z-index:5;
+		/*Place it 0 from the bottom of the visible window screen, make it totally flush*/
 		bottom:0;
+		/*Place it 0 from the left of the visible window screen, make it totally flush*/
 		left:0;
+		/*Set its height to 30% of its parent element, meaning it will totally fill the height of the screen when placed below the "wall" div*/
 		height:30%;
+		/*Set its width to 100% of its parent element*/
 		width:100%;
+		/*And set the background to a linear gradient, in the negative vertical direction (down), transitioning from a light to dark color*/
 		background:linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 100%);
 	}
+	/*Create a keyframe animation called wall-glow which, every 20% of the animation, transitions the bottom color of the #wall div's background color to a different, bright color of light*/
 	@keyframes wall-glow {
 	  	0% {
 	    	background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 100%);
@@ -50,6 +68,7 @@ permalink: fifty/16/
 	    	background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 100%);
 	  	}
 	}
+	/*Create a keyframe animation called floor-glow which, every 20% of the animation, transitions the top color of the #floor div's background color to a different, bright color of light which always matches the #wall div's colors, so they are in synchrony*/
 	@keyframes floor-glow {
 	  	0% {
 	    	background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 100%);
@@ -72,14 +91,18 @@ permalink: fifty/16/
 	}
 </style>
 
+<!-- Create two divs, labeling one with the id "wall" and the other with the id "floor" -->
 <div id="wall"></div>
 <div id="floor"></div>
-<div id="object"></div>
+
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
+<div id="object" class="centered"></div>
 
 <script>
+	// Whenever the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
+		// Set the animations on both the #wall and #floor divs to begin with a 16 second duration, an ease timing function, and looping infinitely.
 		document.getElementById('wall').style.animation = 'wall-glow 16s ease infinite';
 		document.getElementById('floor').style.animation = 'floor-glow 16s ease infinite';
-	})
-
+	});
 </script>

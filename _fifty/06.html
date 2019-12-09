@@ -7,38 +7,49 @@ permalink: fifty/6/
 ---
 
 <style>
+	/*Set the background of the page to black.*/
 	body {
 		background-color:black;
 	}
+	/*For any element with the id "object"*/
 	#object {
+		/*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
 		z-index:10;
 	}
-
+	/*For any element with the class "glow"*/
 	.glow {
+		/*This z-index value means elements with class="glow" (z-index=5) will be "behind" elements with id="object" (z-index=10).*/
 		z-index:5;
-		margin:auto;
+		/*Set the size of .glow elements based on height and width...*/
 		height:20em;
 		width:20em;
+		/*Make it a circle...*/
 		border-radius:50%;
-	    box-shadow: 0em 0em 25em 10em #0ff;
+		/*And set the timing for any animation applied to this element to ease in and out, meaning it will go slower at the start and end, faster in the middle*/
 	    animation-timing-function: ease-in-out;
 	}
-
+	/*Create a keyframe animation called glow*/
 	@keyframes glow {
 	  	0% {
+	  		/*At the beginning of the animation, set the box shadow to have these properties*/
 	    	box-shadow: 0em 0em 25em 10em #0ff;
 	  	}
 	  	50% {
+	  		/*At half-way through the animation, increase the spread of the box-shadow*/
 	    	box-shadow: 0em 0em 25em 12em #0ff;
 	  	}
 	}
 </style>
 
-<div class="wrapper"><div class="glow centered"></div></div>
+<!-- Create a div called "glow" and center it on the page using the "centered" class. -->
+<div class="glow centered"></div>
+<!-- Now, create a div to hold your object and center it on the page using the "centered" class.-->
 <div id="object" class="centered"></div>
 
 <script>
+	// Whenever the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function () {
+		// Grab the first (and only) .glow element and apply the glow animation to it with a duration of 1 second, on infinite repeat
 		document.getElementsByClassName('glow')[0].style.animation = 'glow 1s infinite';
 	});
 </script>

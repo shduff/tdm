@@ -7,54 +7,75 @@ permalink: fifty/7/
 ---
 
 <style>
+	/*Set the background of the page to black.*/
 	body {
 		background-color:black;
 	}
+	/*Set the position for the elements with these ids to "fixed", meaning they are relative to the visible window screen*/
 	#top, #bottom, #right, #left {
 		position:fixed;
 	}
+	/*For the elements with the ids "top" and "bottom" specifically...*/
 	#top, #bottom {
+		/*Set the width of the element to be the full width of the window*/
 		width:100%;
+		/*Set the height to be 10px*/
 		height:10px;
+		/*Align it directly against the left side of the screen*/
 		left:0;
+		/*And make any change to these elements take 3 seconds to happen*/
 		transition:3s;
 	}
+	/*For the elements with the ids "right" and "left specifically"...*/
 	#right, #left {
-		width:10px;
+		/*Set the height of the element to be the full height of the window*/
 		height:100%;
+		/*Set the width to be 10px*/
+		width:10px;
+		/*Align it directly against the top side of the screen*/
 		top:0;
+		/*And make any change to these elements take 4 seconds to happen*/
 		transition:4s;
 	}
 	#top {
+		/*Then, move the #top element 10 pixels above the top of the screen. (This will functionally move the element off the visible screen since its total height is 10px.)*/
 		top:-10px;
 	}
 	#bottom {
+		/*Then, move the #bottom element 10 pixels below the bottom of the screen. (This will functionally move the element off the visible screen since its total height is 10px.)*/
 		bottom:-10px;
 	}
 	#right {
+		/*Then, move the #right element 10 pixels off the right side of the screen. (This will functionally move the element off the visible screen since its total width is 10px.)*/
 		right:-10px;
 	}
 	#left {
+		/*Then, move the #left element 10 pixels off the left side of the screen. (This will functionally move the element off the visible screen since its total width is 10px.)*/
 		left:-10px;
 	}
+	/*For any element with the class "glow"*/
 	.glow {
+		/*Finally, apply a white box-shadow to all elements with class="glow"*/
 		box-shadow:0em 0em 100em 50em white;
 	}
 </style>
 
-<div id="object"></div>
-
+<!-- Now, create a div to hold your object and center it on the page using the "centered" class.-->
+<div id="object" class="centered"></div>
+<!-- Along with a div each with the ids "top", "right", "bottom", and "left" -->
 <div id="top"></div>
 <div id="right"></div>
 <div id="bottom"></div>
 <div id="left"></div>
 
 <script>
+	// Whenever the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
+		// Then, grab each of the divs with the ids "top", "right", "bottom", and "left". Add the class "glow" to each one.
 		document.getElementById('top').classList.add('glow');
 		document.getElementById('bottom').classList.add('glow');
 		document.getElementById('left').classList.add('glow');
 		document.getElementById('right').classList.add('glow');
-
-	})
+		// By adding this class to each div, you are adding its CSS assigned to each div, which adds a large white box-shadow to each div. For the "top" and "bottom" divs, the box-shadow is added over 3 seconds. For the "right" and "left" divs, it's added over 3 seconds. In a rectangular screen, this has the effect of making the glow seem like it's coming from all sides at the same speed.
+	});
 </script>

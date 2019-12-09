@@ -5,18 +5,24 @@ title: Fade Between Background Images
 description: Inspired by the technique I used in <a href="../../firstpancake">the first pancake that inspired this whole project</a>, this first glow effect works by slowly turning the background around the ecstatic object white. Even though nothing actually glows, the transition from photo background to whiteness creates an impression like the white is shining, radiating through the background. <img width="100%" src="../../media/fifty/bg-no-bg.png"> This effect is implemented by first setting the background image as the original object photo, including the full, original background. When the object is clicked, it slowly transitions to another version of the object photo in which the background has been removed, allowing the white page to come through. This gives the effect of the image background glowing as it turns to white behind the object.
 permalink: fifty/1/
 ---
-
+<!-- First, plug in your object  and center it on the page using the "centered" class-->
 <div id="object" class="centered"></div>
 
 <script>
+	// Go into the HTML document and grab your ecstatic object.
 	let object = document.getElementById('object');
 
+	// Whenever the window loads, or reloads...
 	window.addEventListener('load', function () {
+		// Set the background image of our #object div to be a version of its photograph that includes the object's background. (This part is necessary only because I've written default styling for the #object div to use a background-less photo, since that's what I'm using in most of the glow effects, and I wanted to cut down on repeated lines of code I had to write!)
 		object.style.backgroundImage = 'url({{site.baseurl}}/media/fifty/object-bg.png)';
 	});
 
+	// Whenever the #object div id clicked...
 	document.getElementById('object').addEventListener('click', function () {
+		// Set the background imagine of our #object div to be a version of its photograph with the background removed.
 		object.style.backgroundImage = 'url({{site.baseurl}}/media/fifty/object.png)';
+		// Make any transitions on the #object div, meaning any background image changes, take 4 seconds to occur. This gives the effect of one image bleeding into another, transitioning slowly from one to another like a crossfade.
 		object.style.transitionDuration = '4s';
 	});
 </script>

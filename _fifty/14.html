@@ -7,56 +7,89 @@ permalink: fifty/14/
 ---
 
 <style>
+	/*Set the background of the page to black.*/
 	body {
-		background-color:black;
+		background-color: black;
 	}
+	/*For any element with the id "object"*/
 	#object {
+		/*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
 		z-index:10;
 	}
+	/*For any element with the class "neon"*/
 	.neon {
-		visibility:hidden;
-		position:relative;
+		/*This z-index value means elements with class="glow" (z-index=5) will be "behind" elements with id="object" (z-index=10).*/
 		z-index:5;
+		/*Give it a relative position so the z-index applied (a weird bug of z-index is that an element's positioning must be set explicitly for it to work...)*/
+		position:relative;
+		/*Hide this element*/
+		visibility:hidden;
+		/*Round the corners of the element*/
 		border-radius:5px;
+		/*Give it a nice, warm, light yellow color*/
 		background-color:lightyellow;
+		/*Apply the keyframe animation called glow...*/
 		animation:glow;
+		/*...having the animation run infinitely...*/
 		animation-iteration-count: infinite;
+		/*...with a timing function that eases in and out, meaning it is slower at the beginning and end than it is in the middle.*/
 		animation-timing-function: ease-in-out;
 	}
+	/*Create a keyframe animation called glow...*/
 	@keyframes glow {
 	  	0% {
+	  		/*At the beginning of the animation, apply a transform that translates the element 0% along the X axis.*/
 	    	transform:translateX(0%);
 	  	}
 	  	50% {
+	  		/*At the mid-point of the animation, translate the element 20% along the X axis.*/
 	    	transform:translateX(20%);
 	  	}
 	  	100% {
+	  		/*At the end of the animation, translate the element back to 0% along the X axis.*/
 	    	transform:translateX(0%);
 	  	}
 	}
 </style>
 
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
 <div id="object" class="centered"></div>
 
 <script>
+	// Whenever the window loads or reloads...
 	window.addEventListener('load', function() {
+		// Create and run a loop that runs (screen height / 20) times. (This is because we ultimately want to create ~20 divs and have them all fit in the screen, height-wise.) For each run of the loop, there will be a counter i that increases by 1. In the first run, i=0. In the second run, i-1. And so on. 
 		for (i=0;i<(screen.height/20);i++) {
+			// Within each run, create a div...
 			let div = document.createElement('div');
+			// Set its top value so it is places vertically along the height of the page, setting the first div created at top=0, the second div below that one at top=20, the next below that at top=40, and so on...
 			div.style.top = (i+1)*20;
+			// Then set the left position of the div to be a random integer between 20 and -20 so that the field of divs is scattered/unevenly aligned in the horizontal direction...
 			div.style.left = (Math.floor(Math.random() * (20 - (-20))) + -20) + '%';
+			// Set the animation duration of any animations assigned to the div to be a number between 4 and 16 seconds, so the divs aren't in synchrony with their animations...
 			div.style.animationDuration = Math.floor(Math.random() * 12) + 4 + 's';
+			// Set the height of the div to a random integer between 5 and 20px, so there's some variety in their thickness...
 			div.style.height = Math.floor(Math.random() * 15) + 5 + 'px';
+			// Set the width of the div to a random integer percentage between 60 and 90% of the screen's width, so there's some variety in their lengths...
 			div.style.width = Math.floor(Math.random() * 30) + 60 + '%';
-			div.classList.add('neon');
+			// Add a margin of an integer value between 1 and 9px to create some variety in terms of spacing...
 			div.style.margin =  Math.floor(Math.random() * 8) + 1 +'px';
+			// And then add the class "neon"...
+			div.classList.add('neon');
+			// Finally adding the div, with all its styling, into the webpage.
 			document.body.appendChild(div);
 		}
-	})
+	});
+	// Whenever the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
+		// Grab all the elements with the class "neon" and call the list "neons"
 		let neons = document.getElementsByClassName('neon');
+		// Then, create a loop to iterate through the "neons" list. For each run of the loop, there will be a counter i that increases by 1. In the first run, i=0. In the second run, i-1. And so on until the loop has run for every .neon div.
 		for (i=0;i<neons.length;i++) {
-			neons[i].style.transitionDuration = '2s'; // This isn't currently working
+			// For each neon, make any change take 2 seconds to happen...
+			neons[i].style.transitionDuration = '2s'; // This isn't currently working. I'm trying to make the neon divs fade in when #object is clicked...
+			// Finally, for each .neon div, make them visible!
 			neons[i].style.visibility = 'visible';
-		}
-	})
+		};
+	});
 </script>

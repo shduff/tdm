@@ -7,35 +7,53 @@ permalink: fifty/18/
 ---
 
 <style>
-	body {
-		background-color: black;
-	}
-	#object {
-		z-index:10;
-	}
-	#right-spot, #left-spot {
-		position:fixed;
-		z-index:5;
-		width: 0;
-		height: 0;
-		border-left: 50em solid transparent;
-		border-right: 50em solid transparent;
-		border-bottom: 200em solid lightyellow;
-    	opacity:.4;
-    	transform-origin:top center;
-    	/*https://css-tricks.com/almanac/properties/t/transform-origin/*/
-    	visibility:hidden;
-	}
+	/*Set the background of the page to black.*/
+    body {
+        background-color: black;
+    }
+    /*For any element with the id "object"*/
+    #object {
+        /*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
+        z-index:10;
+    }
+    /*For divs with the id right-spot" and "left-spot"*/
+    #right-spot, #left-spot {
+        /*Set their positioning to be fixed, which means relative to the visible window screen*/
+        position:fixed;
+        /*Set their z-index to 5, which means they will be "behind" the #object div*/
+        z-index:5;
+        /*Then use the triangle drawing technique from the earlier star-based glows, drawn from this article: https://basicuse.net/articles/pl/textile/html_css/how_to_draw_stars_using_only_css, to create triangle-shaped, spotlight divs*/
+        width: 0;
+        height: 0;
+        border-left: 30em solid transparent;
+        border-right: 30em solid transparent;
+        border-bottom: 100em solid lightyellow;
+        /*Finally, make them invisible until called.*/
+        visibility:hidden;
+        /*Set the opacity to 40%*/
+        opacity:.4;
+        /*And move the origin around which each will be transformed so they will rotate around the top-center of each div, i.e. the upper point of each of the triangles, where the light would be emanating from the search light bulbs. This technique is explained in this article: https://css-tricks.com/almanac/properties/t/transform-origin/*/
+        transform-origin:top center;
+    }
+    /*For any div with the id "right-spot"*/
 	#right-spot {
+        /*Rotate the div 45 degrees clockwise*/
 		transform:rotate(45deg);	
+        /*Move the top of the div to be 10 em units above the top of the screen*/
 		top:-10em;
+        /*And move the div to be 60 em units right of the left side of the screen*/
 		right:-60em;	
     }
+    /*For any div with the id "left-spot"*/
     #left-spot {
+        /*Rotate the div 15 degrees counterclockwise*/
     	transform:rotate(-15deg);
+        /*Move the top of the div to be 10 em units above the top of the screen*/
     	top:-10em;
+        /*And move the div to be 60 em units left of the right side of the screen*/
 		left:-40em;
     }
+    /*Create a keyframes animation for the right-spot called right-search which rotates somewhat randomly between 10 and 80 degrees*/
     @keyframes right-search {
     	0% {
     		transform:rotate(12deg);
@@ -53,9 +71,10 @@ permalink: fifty/18/
     		transform:rotate(12deg);
     	}
     }
+    /*Create a keyframes animation for the left-spot called left-search which rotates somewhat randomly between -65 and 0 degrees, ensuring the movements of the two lights are not in synchrony*/
 	@keyframes left-search {
     	0% {
-    		visibility:visible;
+    		visibility:visible; /*This line is in here so this animation can be started with a delayed onset, keeping the left-spot invisible slightly longer the than the right*/
     		transform:rotate(-15deg);
     	}
     	11% {
@@ -73,18 +92,25 @@ permalink: fifty/18/
     }
 </style>
 
+<!-- Create two divs for your left and right spots, labeling one with the id "left-spot" and the other with the id "right-spot" -->
 <div id="right-spot"></div>
 <div id="left-spot"></div>
 
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
 <div class="centered" id="object"></div>
 
 <script>
+    // Grab the div with the id "right-spot" and call it rightSpot
 	let rightSpot = document.getElementById('right-spot');
+    // Grab the div with the id "left-spot" and call it leftSpot
 	let leftSpot = document.getElementById('left-spot');
+    // Whenever the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
+        // Make the #right-spot div visible
 		rightSpot.style.visibility = 'visible';
+        // And apply the right-search keyframe animation with a 12 second duration, a timing that eases in and out (meaning it is slower at the start and end than in the middle), and on an infinite loop
 		rightSpot.style.animation = 'right-search 12s ease-in-out infinite';
-		// leftSpot.style.visibility = 'visible';
+        // And apply the left-search keyframe animation with a 8 second duration, a timing that eases in and out (meaning it is slower at the start and end than in the middle), a 2 second delayed start, and on an infinite loop
 		leftSpot.style.animation = 'left-search 8s ease-in-out 2s infinite';
-	})
+	});
 </script>

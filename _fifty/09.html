@@ -7,18 +7,27 @@ permalink: fifty/9/
 ---
 
 <style>
+	/*For any div with the id "object" and the class "glow"*/
 	#object.glow {
-		background-image:url({{site.url}}/media/fifty/white.png);
-		background-size:contain;
+		/*Set the background image to be a plain, white image*/
+		background-image:url({{site.baseurl}}/media/fifty/white.png);
+		/*Make sure the image covers the whole div*/
+		background-size:cover;
+		/*And make any change to the div take 4 seconds to happen*/
 		transition:4s;
 	}
 </style>
 
-<div id="object"></div>
+<!-- Now, create a div to hold your object and center it on the page using the "centered" class.-->
+<div id="object" class="centered"></div>
 
 <script>
+	// Grab the #object div and call it "object"
 	let object = document.getElementById('object');
+	// Whenever the #object div id clicked...
 	object.addEventListener('click', function() {
+		// Give it the class "glow"
 		object.classList.add('glow');
-	})
+		// This has the effect of applying the .glow CSS rules to the #object div, slowly transitioning its background-image to white.jpg.
+	});
 </script>

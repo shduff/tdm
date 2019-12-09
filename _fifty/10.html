@@ -7,29 +7,44 @@ permalink: fifty/10/
 ---
 
 <style>
+	/*For any element with the id "object"*/
 	#object {
+		/*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
 		z-index:10;
 	}
+	/*For any element with the class "glow"*/
 	.glow {
+		/*This z-index value means elements with class="glow" (z-index=5) will be "behind" elements with id="object" (z-index=10).*/
 		z-index:5;
-		margin:auto;
+		/*Set the size of the div based on its height and width...*/
 		height:2000px;
 		width:2000px;
-		background-color:black;
+		/*Make it a circle...*/
 		border-radius:50%;
+		/*And color it black.*/
+		background-color:black;
 	}
+	/*For any element with the class "shrink"*/
 	.shrink {
+		/*Set the size of the element to be quite small based on height and width*/
 		height:20px;
 		width:20px;
+		/*And make any change that happens to the element happen over 3 seconds*/
 		transition:3s;
 	}
 </style>
 
+<!-- Create a div with the class "glow" and center it on the page using the "centered" class.-->
 <div class="glow centered"></div>
+
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
 <div id="object" class="centered"></div>
 
 <script>
+	// Whenever you click the #object div...
 	document.getElementById('object').addEventListener('click', function () {
+		// Grab the first (and only) element with the class "glow" and add the class "shrink" to its classlist
 		document.getElementsByClassName('glow')[0].classList.add('shrink');
+		// This has the effect of rewriting the elements size from the larger height and width associated with the class "glow" to the smaller sizes associated with "shrink". This change will take 3 seconds to happen because of the transition property in the .shrink CSS.
 	});
 </script>

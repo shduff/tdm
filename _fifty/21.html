@@ -7,23 +7,34 @@ permalink: fifty/21/
 ---
 
 <style>
-	body {
-		background-color: black;
-	}
-	#object {
-		z-index:5;
-	}
+	/*Set the background of the page to black.*/
+    body {
+        background-color: black;
+    }
+    /*For any element with the id "object"*/
+    #object {
+        /*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
+        z-index:5;
+    }
+    /*For any element with the id "firefly"*/
 	.firefly {
+		/*Set the position to be fixed relative to the fixed window screen*/
 		position:fixed;
+		/*Hide the element*/
 		visibility:hidden;
-		/*z-index:10;*/
+		/*Set its height and width to create a small form*/
 		height:5px;
 		width:8px;
+		/*And round the edges into an oval*/
 		border-radius:50%;
+		/*Color th div light yellow*/
 		background-color:lightyellow;
-		transition:2s;
+		/*And apply a small box-shadow to the little oval*/
 		box-shadow:0 0 5px 2px lightyellow;
+		/*And make any change to the div happen over 2 second*/
+		transition:2s;
 	}
+	/*Create a keyframe animation that makes a div buzz and vibrate, shaking and rotating slightly to create a minimal, bug-like movement*/
 	@keyframes buzz {
 		0% { transform: translate(2px, 1px) rotate(0deg); }
 		10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -39,28 +50,40 @@ permalink: fifty/21/
 	}
 </style>
 
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
 <div class="centered" id="object"></div>
 
 <script>	
+	// Whenever the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
+		// Create and run a loop that runs 35 times, to create 35 fireflies. For each run of the loop, a counter ("i") will be incremented. On the first run, i=0. On the second, i=2. and so on...
 		for (i=0;i<35;i++) {
+			// Within each run of the loop, create a div
 			let firefly = document.createElement('div');
+			// Give the div a unique id based on the number of the counter
 			firefly.id = 'firefly-' + i;
+			// Giv the div the class "firefly"
 			firefly.classList.add('firefly');
+			// Assign the firefly a random z-index between 0 and 10, so that some fireflies will fly "in front of" and others "behind" the object
 			firefly.style.zIndex = Math.floor(Math.random()*10);
+			// Make the firefly visible
 			firefly.style.visibility = 'visible';
+			// Set the initial positions of the fireflies to all be offscreen, above the visible window...
 			firefly.style.top = Math.floor(Math.random() * -20) + 1 + 'px';
-			// How to generate a random number between max andmin: Math.floor(Math.random() * (max - min + 1) + min)
+			// ...but spread out horizontally, along the x-axis, so they don't all enter from one spot.
 			firefly.style.left = Math.floor(Math.random() * window.innerWidth);
+			// Apply the buzz animation to them with a random duration between 1 and 3 seconds, on an infinite loop
 			firefly.style.animation = 'buzz ' + Math.random()*3 + 's infinite';
+			// And finally, add the firefly to the page
 			document.body.appendChild(firefly);
 
+			// Lastly, set a recurring timer for each firefly, setting the timer to a random number between 1 and 3 seconds
 			setInterval(function() {
-				// https://jsfiddle.net/phpdeveloperrahul/cnLFu/
+				// Reset the position of the firefly to a new ransom top/left position everytime its timer goes off
 				firefly.style.top = Math.floor(Math.random()*window.innerHeight) + 'px';
 				firefly.style.left = Math.floor(Math.random()*window.innerWidth) + 'px';	
-			}, Math.floor(Math.random() * (3000 - 1000 + 1) + 1000));			
-		}
-
-	})
+			}, Math.floor(Math.random() * (3000 - 1000 + 1) + 1000));	
+			// This approach to moving the fireflies was inspired by this code sample		
+		};
+	});
 </script>

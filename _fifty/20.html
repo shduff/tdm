@@ -7,39 +7,59 @@ permalink: fifty/20/
 ---
 
 <style>
-	body {
-		background-color: black;
-	}
-	#object {
-		z-index:5;
-	}
+	/*Set the background of the page to black.*/
+    body {
+        background-color: black;
+    }
+    /*For any element with the id "object"*/
+    #object {
+        /*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
+        z-index:5;
+    }
+    /*For any element with the id "firefly"*/
 	#firefly {
+		/*Set the position to be fixed relative to the fixed window screen*/
 		position:fixed;
+		/*Hide the element*/
 		visibility:hidden;
+		/*Set its z-index to 10, meaning it will be "in front of" the #object div*/
 		z-index:10;
+		/*Set its height and width to create a small form*/
 		height:5px;
 		width:8px;
+		/*And round the edges into an oval*/
 		border-radius:50%;
+		/*Color th div light yellow*/
 		background-color:lightyellow;
-		transition:1s;
+		/*And apply a small box-shadow to the little oval*/
 		box-shadow:0 0 5px 2px lightyellow;
+		/*And make any change to the div happen over 1 second*/
+		transition:1s;
 	}
 </style>
 
+<!-- Create a div with the id "firefly" -->
 <div id="firefly"></div>
+
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
 <div class="centered" id="object"></div>
 
 <script>
+	// Grab the div with the id "firefly" and call it "firefly" in JavaScript
 	let firefly = document.getElementById('firefly');
-
 	
+	// Whenever the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
+		// Make the #firefly visible...
+		firefly.style.visibility = 'visible';
+		// And place it at an initial position relative to the top and left of the screen
 		firefly.style.top = '-20px';
 		firefly.style.left = '-20px';
-		firefly.style.visibility = 'visible';
+		// Then, set a recurring timer for once every second...
 		setInterval(function() {
+			// When it goes off, reset the position of the #firefly for random top and left values that fall within the window's height and width, to make sure it never flies off the screen 
 			firefly.style.top = Math.floor(Math.random()*window.innerHeight) + 'px';
 			firefly.style.left = Math.floor(Math.random()*window.innerWidth) + 'px';	
 		}, 1000);
-	})
+	});
 </script>

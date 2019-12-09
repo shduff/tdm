@@ -7,19 +7,22 @@ permalink: fifty/22/
 ---
 
 <style>
-	body {
-	    margin: 0;
-	    padding: 0;
-	    background: black;
-	}
-	#object {
-		z-index:10;
-	}
+	/*Set the background of the page to black.*/
+    body {
+        background-color: black;
+    }
+    /*For any element with the id "object"*/
+    #object {
+        /*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
+        z-index:5;
+    }
+
+    /*From here down to the next demarcation, the CSS is largely lifted, with just some slight tweaks for positioning and scale, from this model code for creating an animated flame. They did a better, more detailed job explaining it than I would here: https://redstapler.co/easy-realistic-css-fire-effect/*/
 	.wrapper {
 	    width: 80%;
-	    margin:600px 200px;
-	    min-height: 800px;
-	    position: absolute;
+	    position: fixed;
+	    left:10%;
+	    bottom:10%;
 	    display: block;
 
 	}
@@ -89,13 +92,21 @@ permalink: fifty/22/
 	    80% {transform: rotate(-1deg) scaleY(0.90);}
 	    100% {transform: rotate(1deg);}
 	}
+	/*End of largely liften animated CSS flame tutorial code*/
+
+	/*For any div with the id "reflection"*/
 	#reflection {
+		/*Set the position to be fixed, relative to the fixed window screen*/
 		position:fixed;
+		/*Set any change to this element to happen over 2 seconds*/
 		transition:2s;
+		/*Set the height and width to be 100% of its parent element*/
 		height:100%;
 		width:100%;
+		/*And set the opacity to be 30%*/
   		opacity:.3;
 	}
+	/*Create a keyframe animation called reflect which creates a changing linear gradient from black to dark orange to red, changing at an angle, and seeming to mirror the reflection of the flame*/
 	@keyframes reflect {
 		0% { background-image: linear-gradient(55deg, black 85%, darkorange 92%, red 100%); }
 		10% { background-image: linear-gradient(55deg, black 90%, darkorange 95%, red 100%); }
@@ -105,11 +116,14 @@ permalink: fifty/22/
 		100% { background-image: linear-gradient(55deg, black 88%, darkorange 93%, red 100%); }
 	}
 </style>
+
+<!-- Create a div with the id "reflection" -->
 <div id="reflection"></div>
 
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
 <div class="centered" id="object"></div>
 
-
+<!-- This block of HTML is largely lifted from this model code for creating an animated flame. They did a better, more detailed job explaining it than I would here: https://redstapler.co/easy-realistic-css-fire-effect/ -->
 <div class="wrapper">
     <div class="flame-wrapper">
         <div class="flame red"></div>
@@ -120,10 +134,14 @@ permalink: fifty/22/
         <div class="base black"></div>
     </div>
 </div>
+<!-- End of model code -->
 
 <script>
+	// Any time the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
-		document.getElementById('reflection').style.animation = 'reflect 1s ease-in-out infinite'; 
+		// Grab the #reflection div and add the "reflect" keyframe animation to it with a 1 second duration, an ease in and out timing (meaning it's faster at the start and end than in the middle), and on an infinite loop
+		document.getElementById('reflection').style.animation = 'reflect 1s ease-in-out infinite';
+		// And simultaneously grab the first (and only) .flame-wrapper div and make it visible to show the flame 
 		document.getElementsByClassName('flame-wrapper')[0].style.visibility = 'visible';
-	})
+	});
 </script>

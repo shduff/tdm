@@ -7,17 +7,25 @@ permalink: fifty/8/
 ---
 
 <style>
+	/*For any element with the class "glow"*/
 	.glow {
+		/*Add a filter that turns the brightness of the element to 5000%, AKA *VERY* bright*/
 		filter:brightness(5000%);
+		/*Make any change to the element happen over 14 seconds and with an ease in, meaning it goes more slowly at first and speeds up to the end*/
 		transition:14s ease-in;
 	}
 </style>
 
-<div id="object"></div>
+<!-- Now, create a div to hold your object and center it on the page using the "centered" class.-->
+<div id="object" class="centered"></div>
 
 <script>
+	// Grab the #object div and call it "object"
 	let object = document.getElementById('object');
+	// Whenever the #object div id clicked...
 	object.addEventListener('click', function() {
+		// Give it the class "glow"
 		object.classList.add('glow');
-	})
+		// This has the effect of applying the .glow CSS rules to the #object div, slowly transitioning its brightness to 5000%. Image blowout!
+	});
 </script>

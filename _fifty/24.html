@@ -7,21 +7,29 @@ permalink: fifty/24/
 ---
 
 <style>
-	#object {
+	/*For any element with the id "object"*/
+    #object {
+        /*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
 		z-index:10;
 	}
+	/*For any element with the id "sunrise"*/
 	#sunrise {
+		/*Set the position to fixed, meaning relative to the visible window screen*/
 		position:fixed;
+		/*Set the background-image to a linear gradient capturing some color highlights from a photograph of a sunset*/
 		background-image: linear-gradient(180deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 95%);
+		/*Set the z-index to 5, meaning this element will be "behind" the #object div*/
 		z-index:5;
+		/*Set the height and width to be 100% of the height and width of their parent element, in this case the page*/
 		width:100%;
 		height:100%;
+		/*Place the element flush against the top and left of the screen*/
 		top:0;
 		left:0;
-		animation:;
+		/*Make any change to this element happen over the course of 2 seconds*/
 		transition:2s;
 	}
-
+	/*Create a keyframe animation called "rise" in which the bottom color of a linear-gradient pointing upward takes over the screen from bottom to top, a little at a time, to give a smooth effect, slow like a sunrise*/
 	@keyframes rise {
 		0% { background-image: linear-gradient(180deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 95%, rgba(252,176,69,1) 100%); }
 		5% { background-image: linear-gradient(180deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 90%, rgba(252,176,69,1) 100%); }
@@ -43,21 +51,26 @@ permalink: fifty/24/
 		90% { background-image: linear-gradient(180deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 10%, rgba(252,176,69,1) 100%); }
 		95% { background-image: linear-gradient(180deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 5%, rgba(252,176,69,1) 100%); }
 		100% { background-image: linear-gradient(180deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%); }
-
 	}
 </style>
 
+<!-- Create a div with the id "sunrise" -->
 <div id="sunrise"></div>
+
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
 <div class="centered" id="object"></div>
 
 <script>
+	// Grab the element with the id "sunrise" and call it "sunrise" in JavaScript
 	let sunrise = document.getElementById('sunrise');
-
+	// Any time the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
+		// Apply the animation "rise" to the #sunrise element with a duration of 4 seconds and an ease in and out timing, meaning it moves slower at the start and end than in the middle
 		sunrise.style.animation = 'rise 4s ease-in-out';
 	});
-
+	// When the animation on the #sunrise element ends...
 	sunrise.addEventListener("animationend", function() {
+		// Change the background image to the same linear-gradient the animation ends on, to make sure it doesn't revert to its original background coloring
 		sunrise.style.backgroundImage = 'linear-gradient(180deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%)';
 	});
 </script>

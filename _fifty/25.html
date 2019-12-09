@@ -7,9 +7,11 @@ permalink: fifty/25/
 ---
 
 <style>
+	/*Set the background of the page to black.*/
 	body {
 		background:black;
 	}
+	/*Create a keyframe animation called "lightning" which waits different lengths of time between flashes of light. Make the opacity of the flash 60% and, otherwise, return the opacity to 100%*/
 	@keyframes lightning {
 		3% {background:black;}
 		4% {background:lightyellow; opacity:.6;}
@@ -30,10 +32,13 @@ permalink: fifty/25/
 	}
 </style>
 
-<div id="object"></div>
+<!-- Create a div to hold your object and center it on the page using the "centered" class.-->
+<div id="object" class="centered"></div>
 
 <script>
+	// Any time the #object div is clicked...
 	document.getElementById('object').addEventListener('click', function() {
+		// Apply the animation "lightning" to the page's body with a 14 second duration, ease in and out timeing (meaning it moves slower at the start and end than in the beginning), and on an infinite loop
 		document.body.style.animation = 'lightning 14s ease-in-out infinite';
-	})
+	});
 </script>
