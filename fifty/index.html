@@ -2,50 +2,56 @@
 layout: page
 title: 50 Glows
 permalink: /fifty
+pagination:
+  enabled: true
 ---
 
+<!-- First, create a div to hold the project description and framing text for the "splash" page of the site. Give it the id "splash" and the class "splash-in". We'll use these names later. -->
 <div id="splash" class="splash-in">
+	<!-- This splash zone, includes a title. Give the title the id "splash-title", and pull the title from the Jekyll "frontmatter" located at the top of this page.  -->
 	<h1 id="splash-title">{{ page.title }}</h1>
 
+	<!-- This splash zone also includes text describing the project. Make a div for this and give it the id "splash-text" and put the text inside. -->
 	<div id="splash-text">
-		<p>From religious glows like the halo, the sacred heart of Christ, and the burning bush to the secular use of glow in lightsabers and monoliths, heroes heading into the sunset, and the trope of <a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/PowerGlows">Power Glows</a>, I'm interested in glow because of its emotional impact and symbolic meaning. Inspired by Vi Hart's <a href="http://vihart.com/fifty-fizzbuzzes/">Fifty Fizzbuzzes</a> and Rosalie Norris' <a href="https://www.notion.so/powderhouse/Tiny-Digital-Masterpieces-96d5d2c001e24ecfac1a8334d52d5b1b">Tiny Digital Masterpieces</a>, 50 Glows is a collection of glow effects implemented with HTML, CSS, and JavaScript. These effects are at once an exploration of glow as an expression of the sacred and of the Fifty Fizzbuzzes form as a structure for pushing creative problem solving and coding skills development. It is at the intersection of these two projects that 50 Glows is situated. I want to push myself to expand and make more explicit my coding skills while beginning an exploration of objects which centers the ecstatic.</p>
+		<p>From religious glows like the halo, the sacred heart of Christ, and the burning bush to the secular use of glow in lightsabers and monoliths, heroes heading into the sunset, and the trope of <a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/PowerGlows">Power Glows</a>, I'm interested in glow because of its emotional impact and symbolic meaning. Inspired by Vi Hart's <a href="http://vihart.com/fifty-fizzbuzzes/">Fifty Fizzbuzzes</a> and Rosalie Norris' <a href="https://www.notion.so/powderhouse/Tiny-Digital-Masterpieces-96d5d2c001e24ecfac1a8334d52d5b1b">Tiny Digital Masterpieces</a>, {{ page.title }} is a collection of glow effects implemented with HTML, CSS, and JavaScript. These effects are at once an exploration of glow as an expression of the sacred and of the Fifty Fizzbuzzes form as a structure for pushing creative problem solving and coding skills development. It is at the intersection of these two projects that {{page.title }} is situated. I want to push myself to expand and make more explicit my coding skills while beginning an exploration of objects which centers the ecstatic.</p>
 
-		<p>At the center of 50 Glows is an object I love and experience as a kind of talisman or token through which I can connect with the ecstatic: Chuckanucka. Objects are a central elements of ecstatic rituals. As props, set pieces, costume elements, idols, and symbols, they bring people together around shared meaning. They externalize ideas and beliefs in physical form. In Go With The Glow, I will create a world in which ecstatic objects—starting with my own favorite stuffed animal, Chuckanucka—can be lit up, held up, amplified, celebrated, glorified through digital glow effects which run the gamut from playful to formal, cartoonish to square. This project places him in 50 digital situations in which his sacredness to me is made visible to others, amplified through the digital glows I apply to different effects.</p>
+		<p>At the center of {{ page.title }} is an object I love and experience as a kind of talisman or token through which I can connect with the ecstatic: Chuckanucka. Objects are a central elements of ecstatic rituals. As props, set pieces, costume elements, idols, and symbols, they bring people together around shared meaning. They externalize ideas and beliefs in physical form. In Go With The Glow, I will create a world in which ecstatic objects—starting with my own favorite stuffed animal, Chuckanucka—can be lit up, held up, amplified, celebrated, glorified through digital glow effects which run the gamut from playful to formal, cartoonish to square. This project places him in 50 digital situations in which his sacredness to me is made visible to others, amplified through the digital glows I apply to different effects.</p>
 
 		<p>Feel free to poke around and explore these many expressions of Chuckanucka as well as some of the descriptive narrative capturing my process in designing and implementing each of these effects. Enjoy!</p>
-
 	</div>
 
+	<!-- Last thing, the splash zone haas an arrow image that indicates you can pull and push the description in and out of view. The arrow acts like an icon to communicate to folks that the splash zone can be moved out of the way to view the rest of the page. Hopefully, they know to click. -->
 	<img id="splash-arrow" src="{{site.baseurl}}/media/fifty/arrow.png">
-
 </div>
 
+<!-- So now, I'm going to draw a thumbnail to represent each of the glow effects, acting like a table of contents, gallery, menu, etc. All the sub-elements of this menu will go in a container div, which I'll call "glow-thumbnail-container". -->
 <div id="glow-thumbnail-container">
+	<!-- This code is Liquid Templating Language, which is used within Jekyll (https://shopify.github.io/liquid/). You can Identify this code because it uses curly brackets: {}
 
-{% for glow in site.fifty %}
-	<a href="{{site.baseurl}}{{glow.url}}">
-		<div class="glow-thumbnail">
-			<h1>{{ glow.number }}</h1>
-			<h3>{{ glow.title }}</h3>
-			<!-- <p>{{ glow.description }}</p> -->
-		</div>
-	</a> 
-{% endfor %}
-
-	<script>
-		let splashArrow = document.getElementById('splash-arrow');
-		let splash = document.getElementById('splash');
-
-		splashArrow.addEventListener('click', function() {
-			splash.classList.toggle('splash-in');
-			// if (splash.classList.contains('splash-in')) {
-			// 	splashArrow.style.transform = 'rotate(90deg)';
-			// };
-			splash.classList.toggle('splash-out');
-			// if (splash.classList.contains('splash-out')) {
-			// 	splashArrow.style.transform = 'rotate(270deg)';
-			// };
-		})
-	</script>
-
+	To generate thumbnails for every glow effect, I look through all the effects (every "glow") in the Jekyll collection called "fifty". For each glow...-->
+	{% for glow in site.fifty %}
+		<a href="{{site.baseurl}}{{glow.url}}">
+			<!-- I'll make a div with the class "glow-thumbnail" and put the effect's number and title inside (using Liquid variables through Jekyll), so people know what they're clicking into. Then I'll wrap the div with a link, pointing to the glow's specific url (also using Liquid variables through Jekyll) -->
+			<div class="glow-thumbnail">
+				<h1>{{ glow.number }}</h1>
+				<h3>{{ glow.title }}</h3>
+			</div>
+		</a> 
+	{% endfor %}
 </div>
+
+<script>
+	// I know I'm going to use the arrow image as well as the overall splash div, so I grab them from the HTML and assign them JavaScript variables.
+	let splashArrow = document.getElementById('splash-arrow');
+	let splash = document.getElementById('splash');
+
+	// Whenever the arrow image is clicked...
+	splashArrow.addEventListener('click', function() {
+		// "Toggle" the "splash-in" class on our splash container div. This means, if the div already has the class "splash-in", remove it. If it doesn't, add it. In the second case, this has the effect of "sliding" the splash zone into the page, "splashing in" if you will. 
+		splash.classList.toggle('splash-in');
+		// "Toggle" the "splash-out" class on our splash container div. This means, if the div already has the class "splash-out", remove it. If it doesn't, add it. In the second case, this has the effect of "sliding" the splash zone off of the page, "splashing out" if you will. 
+		splash.classList.toggle('splash-out');
+		// Together these two lines of code allow the splash zone to be moved into the page, when people want to read it, and out of the page, when people want to check out the glow menu underneath.
+	});
+</script>
+

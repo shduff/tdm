@@ -13,24 +13,24 @@ permalink: fifty/19/
     }
     /*For any element with the id "object"*/
     #object {
-        /*Elements with larger z-indexes are "on top of" elements with smaller z-indexes.*/
+        /*Set the z-index to 5. This could be any number as long as it's lower than the number of objects it should be behind and higher than objects it should be in front of. Elements with larger z-indexes are "on top of" elements with smaller z-indexes. Note: You have to set the "position" property of any element with a z-index in order for the z-index to work.*/
         z-index:5;
     }
     /*For any element with the id "copy"*/
 	#copy {
-		/*Set the position to fixed, meaning relative to the fixed window screen*/
+		/*Set the position to fixed, meaning relative to the visible window screen.*/
 		position:fixed;
 		/*Set the z-index to 10, meaning it is "in front of" the #object div*/
 		z-index:10;
-		/*Place the copy flush against the right and top of the window screen*/
-		right:0;
-		top:0;
-		/*Apply a light yellow colored box-shadow with these properties*/
-		box-shadow:0 0 20em 10em lightyellow;
 		/*Set the minimum height of the element to be 100% of the window screen, ensuring it is always fullscreen height*/
 		min-height:100%;
 		/*Set its width to 20px*/
 		width:20px;
+		/*Place the copy flush against the right and top of the window screen*/
+		right:0;
+		top:0;
+		/*Apply a light yellow colored box-shadow with these properties.*/
+		box-shadow:0 0 20em 10em lightyellow;
 		/*Make the background-color light yellow, to match the box-shadow*/
 		background-color:lightyellow;
 		/*Make sure any change applied to the element happens over 1 second...*/
@@ -57,9 +57,9 @@ permalink: fifty/19/
 	object.addEventListener('click', function() {
 		// Make #copy visible 
 		copy.style.visibility = 'visible';
-		// And move it to the right on the window screen
+		// And move it to the left on the window screen
 		copy.style.right = '100%';
-		// Simultaneously, set a timer for 1/2 a second, and then turn the picture of the object black and white. This delay lines up the timing of the copy div's movement across the object with the application of the grayscale filter so it seems like the object is transformed by #copy's movement, rather than by an independent process
+		// Set a timer for 1/2 a second, and then turn the picture of the object black and white. This delay lines up the timing of the copy div's movement across the object with the application of the grayscale filter so it seems like the object is transformed by #copy's movement, rather than by an independent process
 		setTimeout(function () {object.style.filter = 'grayscale(100%)'}, 500);
 	});
 </script>

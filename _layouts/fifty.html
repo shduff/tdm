@@ -1,31 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- Link to the css file specifically made for the fifty glow effect pages -->
 	<link rel="stylesheet" type="text/css" href="{{site.baseurl}}/media/css/fifty.css">
+	<!-- And title the page based on the title assigned in the Jekyll frontmatter of the page. This variable is from the Liquid Templating language used by Jekyll. *Note*: This is the title displayed on the page's tab in a web browser, not a title displayed on the page itself. -->
 	<title>{{page.title}}</title>
 </head>
 <body>
+	<div id="glow-title">
+		<h1>{{page.title}}<br>{{page.number}}.</h1>
+	</div>
+	<!-- So first we create a div that will hold all the navigation elements to be added into each glow page. -->
 	<div id="desc-container">
+		<p id="next">
+		    {% if page.next.url %}
+			    <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" title="{{page.next.title}}">
+			    	<!-- &rarr; -->
+			    	next<br>&rarr;
+			    </a>
+		    {% endif %}
+		</p>
+		<p id="previous">
+			{% if page.previous.url %}
+			    <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" title="{{page.previous.title}}">
+			    	<!-- &larr; -->
+			    	prev<br>&larr;
+			    </a>
+		    {% endif %}
+		</p>
+		<!-- Inside that div we include an icon which we'll use to toggle a description of the page on and off... -->
 		<p id="desc-icon">
 			👁‍🗨
 		</p>
+		<!-- As well as the description of the effect, pulled from the Jekyll frontmatter using the Liquid templating language -->
 		<p id="desc">
 			{{ page.description }}
 		</p>
+		<!-- And finally, we'll include a reload icon which we'll program to reload the page so viewers can see the effect again -->
 		<p id="reload">
 			↺
 		</p>
 	</div>
 	<script>
+		// Whenever the description icon is clicked...
 		document.getElementById('desc-icon').addEventListener('click', function() {
+			// We'll toggle the visibility of the description by adding or removing the class "visible"
 			document.getElementById('desc').classList.toggle('visible');
 		});
+		// Whenever the #reload item is clicked...
 		document.getElementById('reload').addEventListener('click', function() {
+			// We'll reload the whole page.
 			location.reload();
 		});
 	</script>
 
+	<!-- And finally, we'll pull in the content of the glow effect's code using the Liquid variable "content". This has the effect of pulling in anything in the glow's page which is below its frontmatter. -->
 	{{content}}
+
+	
 
 </body>
 </html>

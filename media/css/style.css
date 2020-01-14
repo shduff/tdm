@@ -1,22 +1,23 @@
+/* Style for or the table of contents/menu page located at /fifty */
+
 a, a:visited {
+	/*Dont' style links*/
 	text-decoration:none;
 	color:black;
 }
 
-/*for the /fifty glows page*/
-
 #glow-thumbnail-container {
-	/*https://gridbyexample.com/examples/example1/*/
+	/*Create containing div to hold all the glow effects. Make it a grid with 5, equally sized columns, and enough padding on the bottom to leave space for the site splash description. Grid based on this article: https://gridbyexample.com/examples/example1/*/
 	display:grid;
 	grid-template-columns: 19% 19% 19% 19% 19%;
   	grid-gap: 1em;
   	margin-bottom:6em;
 }
+
+/*Style for each glow thumbnail and its contents*/
 .glow-thumbnail {
-	/*box-shadow:0 0 1em .5em white;*/
 	font-family:Courier;
 	margin:1em;
-	/*padding:1em;*/
 	height:12em;
 	border:dotted 1px black;
 	border-radius:1em;
@@ -27,13 +28,12 @@ a, a:visited {
 	color:black;
 }
 
+/*Style for the page's splash/description slide-in*/
 #splash {
 	position:fixed;
 	background-color:beige;
-	/*background-image:url(../fifty/object.png);*/
 	background-size:contain;
 	background-repeat:no-repeat;
-	/*top:0;*/
 	bottom:0;
 	left:0;
 	right:0;
@@ -68,14 +68,11 @@ h1#splash-title {
 	opacity:.5;
 	cursor:pointer;
 	transform:rotate(270deg);
-	/*transition:1s;*/
 }
+/*Use these classes to slide the #splash in and out of the page*/
 #splash.splash-in {
 	bottom:0;
-	/*transform:translateY(-70%);*/
-	/*background-color:red;*/
 }
 #splash.splash-out {
 	bottom:-75%;
-	/*transform:translateY(-70%);*/
 }
