@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +12,8 @@
 	<div id="glow-title">
 		<h1>{{page.title}}<br>{{page.number}}.</h1>
 	</div>
+	<!-- <div id="curtain-png"></div> -->
+	<video id="curtain-vid"><source src="{{site.baseurl}}/media/fifty/curtain.mp4"></video>
 	<!-- So first we create a div that will hold all the navigation elements to be added into each glow page. -->
 	<div id="desc-container">
 		<p id="next">
@@ -42,6 +46,27 @@
 		</p>
 	</div>
 	<script>
+		// // This code shows a png of a curtain whenever
+		// let curtain = document.getElementById('curtain-png');
+		// window.addEventListener('load', function() {
+		// 	curtain.classList.toggle('visible');
+		// 	setTimeout(function() {
+		// 		curtain.classList.toggle('visible');
+		// 	}, 500);
+		// });
+
+		// This code shows a video of a curtain whenever
+		let curtain = document.getElementById('curtain-vid');
+		window.addEventListener('load', function() {
+			curtain.classList.toggle('visible');
+			curtain.play();
+			setTimeout(function() {
+				curtain.classList.toggle('visible');
+				curtain.pause();
+			}, 1000);
+		});
+
+		
 		// Whenever the description icon is clicked...
 		document.getElementById('desc-icon').addEventListener('click', function() {
 			// We'll toggle the visibility of the description by adding or removing the class "visible"

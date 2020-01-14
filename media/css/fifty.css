@@ -3,6 +3,28 @@
 body {
 	font-family:Courier;
 }
+/*Styling for different versions of the curtain/stage implementation.*/
+#curtain-png {
+	position:fixed;
+	z-index:50;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background-image:url({{site.baseurl}}/media/fifty/curtain.png);
+	background-size:cover;
+	display:none;
+}
+#curtain-vid {
+	position:fixed;
+	z-index:50;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	display:none;
+}
+
 #glow-title {
 	position:fixed;
 	z-index:20;
@@ -63,7 +85,7 @@ p#next, p#next>a, p#next>a:visited {
 	border:solid 1px black;
 	border-radius:20px 0 20px 20px;
 	/*And then hide it til we're ready*/
-	display:none;
+	visibility:hidden;
 }
 #reload {
 	/*Identify this element as one of the grid areas in the #desc-contaainer grid*/
@@ -96,4 +118,5 @@ p#next, p#next>a, p#next>a:visited {
 .visible {
 	/*Have a shortcut way to make things visible by applying/removing a class*/
 	display:block !important;
+	visibility:visible !important;
 }
