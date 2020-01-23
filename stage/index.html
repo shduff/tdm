@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>curtains test</title>
+</head>
+<body>
+
+	<style>
+		.curtain {
+			height: 720px;
+			width: 1280px;
+			background-position:0px;
+			background: url('curtains-horiz.png') left center;
+			animation: play 1.8s steps(30) infinite;
+		}
+		@keyframes play {
+		   100% { background-position: -38400px; }
+		}
+	</style>
+
+	<div class="curtain"></div>
+
+</body>
+</html>
