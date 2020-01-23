@@ -8,3 +8,4 @@ Inspired by Vi Hart's <a href="http://vihart.com/fifty-fizzbuzzes/">50 Fizzbuzze
 
 <h2><a href='{{site.baseurl}}/firstpancake'>🥞 First Pancakes 🥞</a></h2>
 <h2><a href='{{site.baseurl}}/fifty'>🕯 50 Glows 🕯</a></h2>
+<h2><a href='{{site.baseurl}}/stage'>🎭 TDM Template 🎭</a></h2>
