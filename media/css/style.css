@@ -1,5 +1,10 @@
 /* Style for or the table of contents/menu page located at /fifty */
 
+body {
+	margin:0;
+	padding:0;
+}
+
 a, a:visited {
 	/*Dont' style links*/
 	text-decoration:none;
