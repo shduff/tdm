@@ -1,10 +1,12 @@
 ---
-number: 2
+number: 4
 layout: cream
-title: brownian particle
+title: brownian grid
 author: shaunalynn
-description:
-permalink: cream/2/
+description: 'The next thing I wanted to do was to go from one particle taking a random walk (fine) to a whole bunch of particles taking random walks (diffusion). This script was more a mistake than anything else, but it really demonstrates the step-size limitation I described in #3. In this script, I set the program to draw a new particle every time it redraws the frame and to begin that paarticle on its random walk. The key to this wild behavior, however, is that I increased the step-size to 20.
+<br><br> 
+20 pixels is a big enough distance that our eyes can really see it. In watching this simulation, especially as the number of particles increases, we begin to notice that, even if the particles are moving "randomly," they''re moving randomly along a grid. The original snippet was also on a grid. Its grid, however, had cells only 1 pixel tall and 1 pixel wide—same as any computer screen. Because the step-size of the particle in this script is so much bigger than the size of the particle itself, however, it can''t help but look mechanical and on a grid. The ratio matters.' 
+permalink: cream/4/
 ---
 
 <script>
@@ -13,13 +15,13 @@ permalink: cream/2/
 	function setup() {
 	  createCanvas(windowWidth, windowHeight);
 	  system = new ParticleSystem(createVector(width/2, height/2));
-	  system.addParticle();
+	  // system.addParticle();
 	  
 	}
 
 	function draw() {
 	  background(51);
-	  // system.addParticle();
+	  system.addParticle();
 	  system.run();
 	}
 
@@ -42,16 +44,16 @@ permalink: cream/2/
 	    const r = floor(random(4));
 	    switch (r) {
 	      case 0:
-	        this.position.x = this.position.x + 5;
+	        this.position.x = this.position.x + 20;
 	        break;
 	      case 1:
-	        this.position.x = this.position.x - 5;
+	        this.position.x = this.position.x - 20;
 	        break;
 	      case 2:
-	        this.position.y = this.position.y + 5;
+	        this.position.y = this.position.y + 20;
 	        break;
 	      case 3:
-	        this.position.y = this.position.y - 5;
+	        this.position.y = this.position.y - 20;
 	        break;
 	    }
 	};

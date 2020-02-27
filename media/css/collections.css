@@ -1,0 +1,77 @@
+/*Styling for the navigation area in each of the fifty glow effects*/
+#desc-container {
+	/*Set the description container relative to the visible window and stick it in the top right corner of the screen*/
+	position:fixed;
+	top:0em;
+	right:-1em;
+	width:25%;
+	/*Make sure it's on top of anything else in the page, so always visible*/
+	z-index:20;
+	/*And make it a two column grid with a wider left-hand column and thinner right hand column, holding the "navigation" elements */
+	display:grid;
+	grid-template-columns: 80% 10%;
+	grid-template-areas: "....... next" "....... previous" "....... reload" "....... icon" "desc .......";
+}
+p#previous, p#previous>a, p#previous>a:visited {
+	grid-area:previous;
+	font-size:1em;
+	cursor:pointer;
+	text-align:center;
+	text-decoration:none;
+	color:grey;
+	height:.3em;
+}
+p#next, p#next>a, p#next>a:visited {
+	grid-area:next;
+	font-size:1em;
+	cursor:pointer;
+	text-align:center;
+	text-decoration:none;
+	color:grey;
+	height:.3em;
+}
+#desc-icon {
+	/*Identify this element as one of the grid areas in the #desc-contaainer grid*/
+	grid-area:icon;
+	/*Style it and turn the cursor into a pointer on hover, so it's clear you can click*/
+	font-size:3em;
+	margin:-.5em .6em 0em .9em;
+	cursor:pointer;
+	/*And flip over X axis so the stem of the emoji's bubble points toward the description bubble point*/
+	transform:scaleX(-1); 
+}
+#desc {
+	/*Identify this element as one of the grid areas in the #desc-contaainer grid*/
+	grid-area:desc;
+	/*Style it to look like a speech bubble*/
+	text-align:justify;
+	margin:0;
+	padding:.8em 1em;
+	background:white;
+	border:solid 1px black;
+	border-radius:20px 0 20px 20px;
+	/*And then hide it til we're ready*/
+	visibility:hidden;
+}
+#reload {
+	/*Identify this element as one of the grid areas in the #desc-contaainer grid*/
+	grid-area:reload;
+	/*Style it and turn the cursor into a pointer on hover, so it's clear you can click*/
+	font-size:3.8em;
+	margin:0 0 .3em  -.1em;
+	cursor:pointer;
+	color:#808080;
+}
+
+#collection-title {
+	position:fixed;
+	z-index:20;
+	top:0;
+	left:1em;
+	color:grey;
+}
+.visible {
+	/*Have a shortcut way to make things visible by applying/removing a class*/
+	display:block !important;
+	visibility:visible !important;
+}

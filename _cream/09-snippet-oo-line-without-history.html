@@ -1,9 +1,15 @@
 ---
 number: 9
 layout: cream
-title: object-oriented line without a history
+title: a line without a history
 author: alec
-description:
+description: 'To tackle the problem of delay, I couldn''t just google. It was obviously something very specific I''d written into <i>my</i> code that had slowed everything down. So, I phoned a friend, asking Alec to look at my program to identify places where the program wasn''t quite working. He idedntified three. 
+<br><br>
+1. I was drawing a separate shape for every line segment of every particle''s random path, starting and ending a shape every time.
+<br><br>
+2. On top of this, I was redrawing the background and paths every frame. This meant that, the number of shapes being drawn every frame was growing exponentially.
+<br><br>
+In order to fix this, I needed to shift my program to only draw a line from its last position to its new one, maintaining the same path drawn during previous frames. Alec made me this snippet to help me conceptualize how I might solve this last problem.'
 permalink: cream/9/
 ---
 

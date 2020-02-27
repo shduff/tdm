@@ -1,0 +1,50 @@
+---
+number: 2
+layout: cream
+title: brownian particle
+author: daniel shiffman
+description: 'This code snippet, by Daniel Shiffman of <a href="http://codingtra.in">Coding Train</a> Coding Challenges, demonstrates how to program a "random walk." Also known as "brownian motion," random walks are one of the most basic ways to simulate diffusion, the phenomenon on which I wanted to begin building my cream-in-coffee simulation. 
+<br><br>
+From my research, it seems that when two fluids are mixed together, assuming they have <i>no</i> gradients between them—<i>e.g.</i> no temperature or acidity or other differences—they will diffuse based on the random movement of their molecules. This seemed strange to me, that random motion would lead to homogenous diffusion over time, but in another sense, it made sense.
+<br><br>
+I decided to take the basic logic of this code snippet and incorporate it into the Particle System I was working with in my own project.'
+permalink: cream/2/
+---
+
+<script>
+	// Daniel Shiffman
+	// http://codingtra.in
+	// https://youtu.be/l__fEY1xanY
+	// https://thecodingtrain.com/CodingChallenges/052-random-walk.html
+
+	let x;
+	let y;
+
+	function setup() {
+	  createCanvas(windowWidth, windowHeight);
+	  x = width / 2;
+	  y = height / 2;
+	  background(51);
+	}
+
+	function draw() {
+	  stroke(255, 100);
+	  strokeWeight(2);
+	  point(x, y);
+	  const r = floor(random(4));
+	  switch (r) {
+	    case 0:
+	      x = x + 1;
+	      break;
+	    case 1:
+	      x = x - 1;
+	      break;
+	    case 2:
+	      y = y + 1;
+	      break;
+	    case 3:
+	      y = y - 1;
+	      break;
+	  }
+	}
+</script>

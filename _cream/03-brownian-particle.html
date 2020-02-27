@@ -1,9 +1,11 @@
 ---
 number: 3
 layout: cream
-title: brownian grid
+title: brownian particle
 author: shaunalynn
-description:
+description: 'And I found success pretty quickly. Here is a single particle, generated using the Particle System from #1 adapted to update its position using the same logic laid out in the Random Walk from #2. Looking under the hood of this random walk showed me that, rather than implementing a perfectly random walk, one in which the particle might move to any point within a certain distance from its current point, this snippet actually limited the particles movements to the cardinal directions: up, down, left, and right.
+<br><br>
+As long as the particle continues to take small steps, as it is here (with a step-size of 5) and as it is in #2 (with a step-size of 1), the particle appears to move randomly. If you think about it, this makes sense, since thing moving a little bit up and then right and then up and then right, appears to make a line that moves up and to the right. By keeping the step-size small, we are able to aapproximate slanted lines and more complex curves simply by moving horizontally and vertically.'
 permalink: cream/3/
 ---
 
@@ -13,13 +15,13 @@ permalink: cream/3/
 	function setup() {
 	  createCanvas(windowWidth, windowHeight);
 	  system = new ParticleSystem(createVector(width/2, height/2));
-	  // system.addParticle();
+	  system.addParticle();
 	  
 	}
 
 	function draw() {
 	  background(51);
-	  system.addParticle();
+	  // system.addParticle();
 	  system.run();
 	}
 
@@ -42,16 +44,16 @@ permalink: cream/3/
 	    const r = floor(random(4));
 	    switch (r) {
 	      case 0:
-	        this.position.x = this.position.x + 20;
+	        this.position.x = this.position.x + 5;
 	        break;
 	      case 1:
-	        this.position.x = this.position.x - 20;
+	        this.position.x = this.position.x - 5;
 	        break;
 	      case 2:
-	        this.position.y = this.position.y + 20;
+	        this.position.y = this.position.y + 5;
 	        break;
 	      case 3:
-	        this.position.y = this.position.y - 20;
+	        this.position.y = this.position.y - 5;
 	        break;
 	    }
 	};

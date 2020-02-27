@@ -43,8 +43,3 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.visible {
-	/*Have a shortcut way to make things visible by applying/removing a class*/
-	display:block !important;
-	visibility:visible !important;
-}
