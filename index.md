@@ -9,4 +9,4 @@ Inspired by Vi Hart's <a href="http://vihart.com/fifty-fizzbuzzes/">50 Fizzbuzze
 <h2><a href='{{site.baseurl}}/firstpancake'>🥞 First Pancakes 🥞</a></h2>
 <h2><a href='{{site.baseurl}}/fifty'>🕯 50 Glows 🕯</a></h2>
 <h2><a href='{{site.baseurl}}/stage'>🎭 TDM Stage 🎭</a></h2>
-<h2><a href='{{site.baseurl}}/cream'>☕️ Cream in my Coffee ☕️</a></h2>
+<h2><a href='{{site.baseurl}}/cream'>☕️ Cream in my coffee ☕️</a></h2>

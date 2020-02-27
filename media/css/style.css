@@ -78,7 +78,7 @@ h1#splash-title {
 }
 
 /*This is for the cream canvases...*/
-canvas {
+canvas#defaultCanvas0 {
 	position:fixed;
 	top:0;
 	left:0;
