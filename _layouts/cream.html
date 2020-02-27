@@ -2,11 +2,17 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="{{site.baseurl}}/media/css/style.css">
+	{% include p5.html %}
 	<title>{{page.title}}</title>
 </head>
 <body>
+	<div id="collection-title">
+		<h1>{{page.title}}<br>{{page.number}}.</h1>
+	</div>
 	
 	{{content}}
+
+	{% include collectionNav.html %}
 
 </body>
 </html>
