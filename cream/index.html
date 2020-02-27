@@ -1,0 +1,17 @@
+---
+layout: page
+title: Cream in my coffee
+permalink: /cream
+---
+
+<div id="sketch-thumbnail-container">
+
+	{% for sketch in site.cream %}
+		<a href="{{site.baseurl}}{{sketch.url}}">
+			<div class="sketch-thumbnail">
+				<h1>{{ sketch.number }} — {{ sketch.title }}</h1>
+			</div>
+		</a> 
+	{% endfor %}
+</div>
+

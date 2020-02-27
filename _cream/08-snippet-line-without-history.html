@@ -1,0 +1,48 @@
+---
+number: 8
+layout: page
+title: a line without a history
+author: alec
+description:
+permalink: cream/8/
+---
+
+<script>
+	let position = {
+	  x: 0,
+	  y: 10
+	}
+
+	let nextPosition = {
+	  x: position.x,
+	  y: position.y
+	}
+
+	let velocity = {
+	  x: 1,
+	  y: 0
+	}
+
+	let acceleration = {
+	  x: 0,
+	  y: 0.01
+	}
+
+	function setup() {
+	  createCanvas(windowWidth, windowHeight);
+	  stroke('purple'); // Change the color
+	  strokeWeight(2);
+	}
+
+	function draw() {
+	  nextPosition.x = position.x + velocity.x;
+	  nextPosition.y = position.y + velocity.y;
+	  line(position.x, position.y, nextPosition.x, nextPosition.y);
+
+	  velocity.x += acceleration.x;
+	  velocity.y += acceleration.y;
+
+	  position.x = nextPosition.x;
+	  position.y = nextPosition.y;
+	}
+</script>

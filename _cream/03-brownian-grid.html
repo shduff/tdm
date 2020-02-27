@@ -1,0 +1,82 @@
+---
+number: 3
+layout: page
+title: brownian grid
+author: shaunalynn
+description:
+permalink: cream/3/
+---
+
+<script>
+	let system;
+
+	function setup() {
+	  createCanvas(windowWidth, windowHeight);
+	  system = new ParticleSystem(createVector(width/2, height/2));
+	  // system.addParticle();
+	  
+	}
+
+	function draw() {
+	  background(51);
+	  system.addParticle();
+	  system.run();
+	}
+
+	// A simple Particle class
+	let Particle = function(position) {
+	  // this.acceleration = createVector(0, 0.05);
+	  this.velocity = createVector(random(-1, 1), random(-1, 0));
+	  this.position = position.copy();
+	};
+
+	Particle.prototype.run = function() {
+	  this.update();
+	  this.display();
+	};
+
+	// Method to update position
+	Particle.prototype.update = function(){
+	  // this.velocity.add(this.acceleration);
+	  // this.position.add(this.velocity);
+	    const r = floor(random(4));
+	    switch (r) {
+	      case 0:
+	        this.position.x = this.position.x + 20;
+	        break;
+	      case 1:
+	        this.position.x = this.position.x - 20;
+	        break;
+	      case 2:
+	        this.position.y = this.position.y + 20;
+	        break;
+	      case 3:
+	        this.position.y = this.position.y - 20;
+	        break;
+	    }
+	};
+
+	// Method to display
+	Particle.prototype.display = function() {
+	  stroke(200, 255);
+	  strokeWeight(2);
+	  fill(127, 255);
+	  ellipse(this.position.x, this.position.y, 12, 12);
+	};
+
+	let ParticleSystem = function(position) {
+	  this.origin = position.copy();
+	  this.particles = [];
+	};
+
+	ParticleSystem.prototype.addParticle = function() {
+	  this.particles.push(new Particle(this.origin));
+	};
+
+	ParticleSystem.prototype.run = function() {
+	  for (let i = this.particles.length-1; i >= 0; i--) {
+	    let p = this.particles[i];
+	    p.run();
+	  }
+	};
+</script>

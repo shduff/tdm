@@ -1,0 +1,139 @@
+---
+number: 5
+layout: page
+title: pouring particles
+author: shaunalynn
+description:
+permalink: cream/5/
+---
+
+<script>
+	// PARTICLE SYSTEM — Inspired by https://p5js.org/examples/simulate-particle-system.html
+	let system;
+	let elapsedTime = 0;
+	let diffusiveForce = 5; // Step size for random walk modeling diffusion
+	let coffeeResistance = 0.001 // How hard is it for a particle to move through the coffee
+	let collisionFactor = 0.5 // The proportion of velocity a particle maintains after colliding with the cup
+	let numberOfParticles = 1000; // How many particles?
+	let buffer = 10; // Distance from coffee cup/screen edge at which particles respond as if in a collision 
+
+	function setup() {
+	  createCanvas(windowWidth, windowHeight);
+	  system = new ParticleSystem(createVector(width/2, 0));
+	  for (let i=0; i<numberOfParticles; i++) {
+	    system.addParticle();
+	  };
+	  
+	}
+
+	function draw() {
+	  background(51);
+	  elapsedTime += deltaTime;
+	  system.run();
+	}
+
+	// A simple Particle class
+	let Particle = function(position) {
+	  this.acceleration = createVector(0, 0.05);
+	  this.velocity = createVector(random(0), random(1,10));
+	  this.position = position.copy();
+	  this.previousPosition = this.position;
+	};
+
+	Particle.prototype.run = function() {
+	  this.previousPosition = this.position;
+	  this.update();
+	  this.display();
+	};
+
+	// Method to update position
+	Particle.prototype.update = function(){
+	  
+	  // RANDOM WALK — Inspired by https://editor.p5js.org/codingtrain/sketches/N-qqe1ExZ 
+	    var chooseRandomDirection = floor(random(4));
+	    switch (chooseRandomDirection) {
+	      case 0:
+	        this.position.x = this.position.x + diffusiveForce;
+	        break;
+	      case 1:
+	        this.position.x = this.position.x - diffusiveForce;
+	        break;
+	      case 2:
+	        this.position.y = this.position.y + diffusiveForce;
+	        break;
+	      case 3:
+	        this.position.y = this.position.y - diffusiveForce;
+	        break;
+	    }
+	  
+	  this.position.add(this.velocity);
+	  this.velocity.add(this.acceleration);
+	  
+	    if (elapsedTime > 100) {
+	    
+	    // When the cream is first poured into cup, hits the bottom of the cup, moving outward to the sides of the cup...
+	    if (this.position.y >= height - buffer) {
+	      var hitBottom = floor(random(2));
+	      switch (hitBottom) {
+	        case 0:
+	          this.velocity.x += this.velocity.y*collisionFactor;
+	          break;
+	        case 1:
+	          this.velocity.x -= this.velocity.y*collisionFactor;
+	          break;
+	      }
+	      this.velocity.y = 0;
+	    } 
+
+	    // When the cream hits the edge of the cup and flows up the sides...
+	    if (this.position.x >= width - buffer || this.position.x <= buffer) {
+	      this.velocity.y -= Math.abs(this.velocity.x);
+	      this.velocity.x = 0;
+	    }
+	    
+	    // When the cream reaches the surface of the coffee and turns back inward to the center of the cup...
+	    if (this.position.y <= buffer && this.position.x <= buffer) {
+	      this.velocity.x -= this.velocity.y*collisionFactor;
+	      this.velocity.y = 0;
+	    } else if (this.position.y <= buffer && this.position.x >= width - buffer) {
+	      this.velocity.x += this.velocity.y*collisionFactor;
+	      this.velocity.y = 0;
+	    }
+	  }
+	  
+	  // Making sure partcicles can't leave the cup by going off the visible screen...
+	  if (this.position.x < 0) {
+	    this.position.x = 0;
+	  } else if (this.position.x > width) {
+	    this.position.x = width;
+	  } else if (this.position.y < 0) {
+	    this.position.y = 0;
+	  } else if (this.position.y > height) {
+	    this.position.y = height;
+	  }
+	};
+
+	// Method to display
+	Particle.prototype.display = function() {
+	  stroke(200, 255);
+	  strokeWeight(2);
+	  fill(127, 255);
+	  ellipse(this.position.x, this.position.y, 12, 12);
+	};
+
+	let ParticleSystem = function(position) {
+	  this.origin = position.copy();
+	  this.particles = [];
+	};
+
+	ParticleSystem.prototype.addParticle = function() {
+	  this.particles.push(new Particle(this.origin));
+	};
+
+	ParticleSystem.prototype.run = function() {
+	  for (let i = this.particles.length-1; i >= 0; i--) {
+	    let p = this.particles[i];
+	    p.run();
+	  }
+	};
+</script>

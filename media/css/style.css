@@ -76,3 +76,10 @@ h1#splash-title {
 #splash.splash-out {
 	bottom:-75%;
 }
+
+/*This is for the cream canvases...*/
+canvas {
+	position:fixed;
+	top:0;
+	left:0;
+}

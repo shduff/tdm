@@ -1,0 +1,147 @@
+---
+number: 10
+layout: page
+title: cream simulation
+author: shaunalynn
+description:
+permalink: cream/10/
+---
+
+<script>
+	// PARTICLE SYSTEM — Inspired by https://p5js.org/examples/simulate-particle-system.html
+	let system;
+	let elapsedTime = 0;
+	let numberOfParticles = 150;
+	let creamColor; // color is actually set in setup() function
+	let coffeeColor = '#6f4e37'; // must be in the form fits here: color(HERE)
+	let creamOpacity = 255; // starting opacity/alpha of cream paths
+	let creamOpacityIncrement = .1;
+	let creamWidth = 2.5; // starting strokeWeight of the cream paths
+	let creamWidthIncrement = .001;
+	let coffeeTemp = 100; // 
+	let creamTemp = 25; //
+	let tempDiff = coffeeTemp - creamTemp; //
+	let coffeeResistance = .02; // acceleration/coffeeResistance hybrid
+	let diffusiveForce = 40; // Step size for random walk modeling diffusion
+	let collisionFactor = 0.5; // The proportion of velocity a particle maintains after colliding with the cup
+	let cupBuffer = 10; // Distance from coffee cup/screen edge at which particles respond as if in a collision 
+
+	function setup() {
+	  creamColor = color('#cca483'); // offwhite = '#fffef2'
+	  createCanvas(windowWidth, windowHeight);
+	  background(coffeeColor);
+	  system = new ParticleSystem(createVector(width / 2, 0));
+	  for (let i = 0; i < numberOfParticles; i++) {
+	    system.addParticle();
+	  };
+
+	}
+
+	function draw() {
+	  elapsedTime += deltaTime;
+	  
+	  system.run();
+
+	  creamWidth -= creamWidthIncrement;
+	  creamOpacity -= creamOpacityIncrement;
+
+	  creamTemp += .01;
+	  coffeeTemp -= .005;
+	  if (tempDiff >= 0 && diffusiveForce >= 5) {
+	    diffusiveForce -= .05;
+	  }
+	}
+
+	// A simple Particle class
+	let Particle = function(position) {
+	  this.acceleration = createVector(0, coffeeResistance);
+	  this.velocity = createVector(random(0), random(1, 10));
+	  this.position = position.copy();
+	  this.nextPosition = createVector();
+	};
+
+	Particle.prototype.run = function() {
+	  this.update();
+	  this.show();
+	  this.position.set(this.nextPosition);
+	};
+
+	// Method to update position
+	Particle.prototype.update = function() {
+
+	  // When the cream is first poured into cup, hits the bottom of the cup, moving outward to the sides of the cup...
+	  if (elapsedTime > 100) {
+	    if (this.position.y >= height - cupBuffer) {
+	      var hitBottom = floor(random(2));
+	      switch (hitBottom) {
+	        case 0:
+	          this.velocity.x += this.velocity.y * collisionFactor;
+	          break;
+	        case 1:
+	          this.velocity.x -= this.velocity.y * collisionFactor;
+	          break;
+	      }
+	      this.velocity.y = 0;
+	    }
+
+	    // When the cream hits the edge of the cup and flows up the sides...
+	    if (this.position.x >= width - cupBuffer || this.position.x <= cupBuffer) {
+	      this.velocity.y -= Math.abs(this.velocity.x);
+	      this.velocity.x = 0;
+	    }
+
+	    // When the cream reaches the surface of the coffee and turns back inward to the center of the cup...
+	    if (this.position.y <= cupBuffer && this.position.x <= cupBuffer) {
+	      this.velocity.x -= this.velocity.y * collisionFactor;
+	      this.velocity.y = 0;
+	    } else if (this.position.y <= cupBuffer && this.position.x >= width - cupBuffer) {
+	      this.velocity.x += this.velocity.y * collisionFactor;
+	      this.velocity.y = 0;
+	    }
+	  }
+
+	  // Making sure partcicles can't leave the cup by going off the visible screen...
+	  if (this.position.x < 0) {
+	    this.position.x = 0;
+	  } else if (this.position.x > width) {
+	    this.position.x = width;
+	  } else if (this.position.y < 0) {
+	    this.position.y = 0;
+	  } else if (this.position.y > height) {
+	    this.position.y = height;
+	  }
+
+	  // New random walk inspired by https://editor.p5js.org/codingtrain/sketches/9DnjxCNB-
+	  this.nextPosition.x = this.position.x + random(-1 * diffusiveForce, diffusiveForce);
+	  this.nextPosition.y = this.position.y + random(-1 * diffusiveForce, diffusiveForce);
+
+	  this.nextPosition.add(this.velocity);
+	  this.velocity.add(this.acceleration);
+
+	};
+
+	Particle.prototype.show = function() {
+	  let c = color(creamColor);
+	  c.setAlpha(creamOpacity);
+	  stroke(c);
+	  strokeWeight(creamWidth);
+	  line(this.position.x, this.position.y, this.nextPosition.x, this.nextPosition.y);
+	};
+
+	let ParticleSystem = function(position) {
+	  this.origin = position.copy();
+	  this.particles = [];
+	};
+
+	ParticleSystem.prototype.addParticle = function() {
+	  this.particles.push(new Particle(this.origin));
+	};
+
+	ParticleSystem.prototype.run = function() {
+	  for (let i = this.particles.length - 1; i >= 0; i--) {
+	    let p = this.particles[i];
+	    p.run();
+	  }
+	};
+</script>
+
